@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>فایت کلاب | Fight Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: linear-gradient(145deg, #1a0a1e 0%, #0c0c10 50%, #1e0a0a 100%);
+      font-family: 'Vazirmatn', sans-serif;
+      color: #d0d0d0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 15px 30px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .particle-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, rgba(220, 38, 38, 0.08) 0%, transparent 50%);
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(30, 15, 35, 0.75);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(147, 51, 234, 0.2);
+      border-radius: 32px;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.8);
+      padding: 20px 18px 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0 15px;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(to left, #c084fc, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hamburger-btn {
+      background: rgba(107, 114, 128, 0.1);
+      border: 1px solid rgba(192, 132, 252, 0.5);
+      color: #c084fc;
+      font-size: 1.9rem;
+      width: 48px; height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 110;
+    }
+
+    .hamburger-btn:hover { background: rgba(147, 51, 234, 0.2); color: white; }
+
+    .side-menu {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 300px; height: 100vh;
+      background: rgba(15, 5, 18, 0.97);
+      backdrop-filter: blur(30px);
+      border-left: 1px solid rgba(239, 68, 68, 0.4);
+      z-index: 100;
+      padding: 90px 25px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      overflow-y: auto;
+    }
+
+    .side-menu.active { right: 0; }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 95;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+    }
+
+    .menu-overlay.show { opacity: 1; visibility: visible; }
+
+    .menu-item {
+      color: #b0a0b8;
+      font-size: 1.1rem;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(107, 114, 128, 0.05);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid transparent;
+    }
+
+    .menu-item i { color: #c084fc; width: 22px; }
+    .menu-item:hover { background: rgba(147, 51, 234, 0.15); border-color: #ef4444; color: #fff; }
+
+    .main-content { margin-top: 15px; }
+
+    .page { display: none; animation: fade 0.3s ease; }
+    .page.active-page { display: block; }
+
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+      background: rgba(40, 20, 45, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(192, 132, 252, 0.2);
+      border-radius: 24px;
+      padding: 25px 20px;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #c084fc;
+      margin-bottom: 18px;
+      border-right: 4px solid #ef4444;
+      padding-right: 12px;
+    }
+
+    .link-box {
+      background: #1e1225;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+      border: 1px dashed #c084fc;
+    }
+
+    .ble-id {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #c084fc, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 10px 0;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #9333ea, #dc2626);
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 10px 5px;
+      transition: 0.2s;
+    }
+
+    .btn:hover { box-shadow: 0 8px 18px rgba(239, 68, 68, 0.5); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      margin: 5px;
+    }
+
+    .admin-badge {
+      background: #2d1f33;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(192, 132, 252, 0.4);
+      color: #d8b4fe;
+      display: inline-block;
+      margin: 5px;
+    }
+
+    .owner-highlight { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; }
+
+    .footer-note {
+      margin-top: 25px;
+      color: #9ca3af;
+      text-align: center;
+      border-top: 1px solid #374151;
+      padding-top: 18px;
+    }
+
+    .dev-text { color: #c084fc; }
+
+    .post-form-card {
+      background: rgba(50, 25, 55, 0.7);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(192, 132, 252, 0.25);
+    }
+
+    .post-input-group { display: flex; flex-direction: column; gap: 12px; }
+
+    .post-input, .name-input, input, textarea {
+      background: rgba(20, 10, 25, 0.8);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      border-radius: 16px;
+      padding: 14px 18px;
+      color: #e0d0f0;
+      font-family: 'Vazirmatn', sans-serif;
+      outline: none;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .post-input:focus, .name-input:focus, input:focus, textarea:focus {
+      border-color: #ef4444;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+    }
+
+    .post-input { min-height: 100px; resize: vertical; }
+
+    .posts-feed { display: flex; flex-direction: column; gap: 16px; }
+
+    .post-card {
+      background: rgba(35, 18, 40, 0.7);
+      border: 1px solid rgba(192, 132, 252, 0.2);
+      border-radius: 20px;
+      padding: 18px 20px;
+      position: relative;
+    }
+
+    .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+
+    .user-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c084fc, #ef4444);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .user-name {
+      color: #f0e0ff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .blue-tick {
+      color: #1d9bf0;
+      font-size: 0.9rem;
+    }
+
+    .post-time { color: #9ca3af; font-size: 0.75rem; }
+    .post-content { color: #d8c8e8; line-height: 1.7; margin-bottom: 14px; }
+
+    .post-actions {
+      display: flex;
+      gap: 20px;
+      border-top: 1px solid rgba(107, 114, 128, 0.2);
+      padding-top: 12px;
+    }
+
+    .action-btn {
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 4px 8px;
+      border-radius: 12px;
+      transition: 0.2s;
+    }
+
+    .action-btn:hover { color: #c084fc; }
+    .like-btn.liked { color: #ef4444; }
+    .delete-btn { margin-right: auto; color: #ef4444; }
+    .delete-btn:hover { background: rgba(239, 68, 68, 0.1); }
+
+    .no-posts { text-align: center; color: #9ca3af; padding: 30px; }
+
+    .announcement-box {
+      background: #2d1f33;
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 20px;
+      border: 1px solid #c084fc;
+    }
+
+    .announcement-box img { max-width: 100%; border-radius: 12px; margin-top: 10px; }
+
+    .tournament-item, .team-card {
+      background: #2d1f33;
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .team-card h4 { color: #c084fc; margin-bottom: 8px; }
+    .team-card a { color: #60a5fa; text-decoration: none; }
+
+    .status-bar {
+      background: #2d1f33;
+      border-radius: 12px;
+      padding: 8px 15px;
+      margin-bottom: 15px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    .status-bar.success { color: #22c55e; }
+    .status-bar.error { color: #ef4444; }
+
+    .toggle-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .toggle-switch input { display: none; }
+
+    .toggle-label {
+      width: 50px;
+      height: 26px;
+      background: #4a5568;
+      border-radius: 13px;
+      cursor: pointer;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .toggle-label::after {
+      content: '';
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      transition: 0.3s;
+    }
+
+    .toggle-switch input:checked + .toggle-label {
+      background: #22c55e;
+    }
+
+    .toggle-switch input:checked + .toggle-label::after {
+      right: 26px;
+    }
+
+    .music-player {
+      position: fixed;
+      bottom: 20px; left: 20px;
+      background: rgba(30, 15, 35, 0.9);
+      padding: 10px 18px;
+      border-radius: 40px;
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .music-btn { background: transparent; border: none; color: #c084fc; font-size: 1.6rem; cursor: pointer; }
+
+    .code-list {
+      max-height: 200px;
+      overflow-y: auto;
+      background: #1a1020;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 480px) {
+      .music-player { bottom: 15px; left: 15px; padding: 8px 14px; }
+      .side-menu { width: 280px; }
+    }
+  </style>
+</head>
+<body>
+<div class="particle-bg"></div>
+
+<div class="container">
+  <div class="header">
+    <span class="logo-text">🥊 فایت کلاب</span>
+    <div class="hamburger-btn" id="menuToggleBtn"><i class="fas fa-bars"></i></div>
+  </div>
+
+  <div class="main-content">
+    <div id="homePage" class="page active-page">
+      <div class="card">
+        <div class="title">🏠 خانه</div>
+        <p style="font-size: 1.1rem; line-height: 2;">
+          فایت کلاب اصلی <span style="color:#c084fc;">بله</span> توسط 
+          <span style="color:#d8b4fe;">رضا مظفری</span> ساخته شد و 
+          <span style="color:#fca5a5;">4 مالک</span> داشته. مالک فعلی: 
+          <span style="color:#ef4444; font-weight:900;">آرشان اسپریت</span>
+        </p>
+        <div id="announcementContainer"></div>
+      </div>
+    </div>
+
+    <div id="linksPage" class="page">
+      <div class="card">
+        <div class="title">🔗 لینک ورود</div>
+        <div class="link-box">
+          <div class="ble-id" id="bleID">@link_fight_club_ble</div>
+          <p>با این آیدی در <strong>بله</strong> وارد شوید</p>
+          <button class="btn" id="copyBtn"><i class="far fa-copy"></i> کپی</button>
+          <a href="https://ble.ir" target="_blank" class="btn" style="text-decoration:none;"><i class="fas fa-external-link-alt"></i> بله</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="adminsPage" class="page">
+      <div class="card">
+        <div class="title">👑 مالک و ادمین‌ها</div>
+        <span class="admin-badge owner-highlight"><i class="fas fa-crown"></i> مالک: آرشان اسپریت</span>
+        <div style="margin-top:15px;">
+          <span class="admin-badge">استاد امیر</span>
+          <span class="admin-badge">ممد کایل</span>
+          <span class="admin-badge">نئورگان</span>
+          <span class="admin-badge">لوسیفر</span>
+          <span class="admin-badge">ممد استریت</span>
+          <span class="admin-badge">امیر استریت</span>
+          <span class="admin-badge">علی نگان</span>
+          <span class="admin-badge">علی لوتی</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="aboutPage" class="page">
+      <div class="card">
+        <div class="title">📜 درباره ما</div>
+        <p>ساخته شده توسط <span class="dev-text">Team Null</span></p>
+        <p style="color:#9ca3af; margin-top:10px;">سازنده: <span style="color:#c084fc; font-weight:700;">استاد امیر</span></p>
+        <p style="color:#9ca3af; margin-top:20px;">تمامی حقوق محفوظ © 2025</p>
+      </div>
+    </div>
+
+    <div id="honorPage" class="page">
+      <div class="card">
+        <div class="title">🏆 تالار افتخارات</div>
+        <div class="no-posts">🚧 در حال توسعه...</div>
+      </div>
+    </div>
+
+    <div id="newsPage" class="page">
+      <div class="card">
+        <div class="title">📢 اخبار</div>
+        <div style="background:#251a2b; border-radius:16px; padding:18px;">
+          <p>🔴 بروزرسانی‌های جدید به زودی</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="postsPage" class="page">
+      <div class="card">
+        <div class="title">📝 پست‌های کاربران</div>
+        <div id="postsContent"></div>
+      </div>
+    </div>
+
+    <div id="tournamentsPage" class="page">
+      <div class="card">
+        <div class="title">🏅 تورنمنت‌ها</div>
+        <div id="tournamentsContent"></div>
+      </div>
+    </div>
+
+    <div id="teamsPage" class="page">
+      <div class="card">
+        <div class="title">⚔️ گاردها و اکیپ‌ها</div>
+        <div id="teamsContent"></div>
+      </div>
+    </div>
+
+    <div id="adminPage" class="page">
+      <div class="card">
+        <div class="title">🔐 پنل مدیریت</div>
+        <div id="adminLoginForm">
+          <input type="password" id="adminPassword" placeholder="رمز عبور مدیر..." style="width:100%;">
+          <button class="btn" id="adminLoginBtn"><i class="fas fa-sign-in-alt"></i> ورود</button>
+        </div>
+        <div id="adminPanel" style="display:none;">
+          <p style="color:#22c55e; margin-bottom:15px;">✅ خوش آمدید <span id="adminRoleName"></span></p>
+          <button class="btn btn-sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+          
+          <div id="ownerSection" style="display:none;">
+            <hr style="border-color:#333; margin:20px 0;">
+            <h3>⚙️ تنظیمات پست‌گذاری</h3>
+            <div class="toggle-switch">
+              <input type="checkbox" id="postingToggle" checked>
+              <label class="toggle-label" for="postingToggle"></label>
+              <span>امکان پست‌گذاری برای کاربران</span>
+            </div>
+
+            <h3>📋 کدهای تیک آبی</h3>
+            <div class="code-list" id="codeList"></div>
+
+            <h3>📢 تنظیم اطلاعیه</h3>
+            <textarea id="announcementText" placeholder="متن اطلاعیه..." rows="3"></textarea>
+            <input type="text" id="announcementImageUrl" placeholder="آدرس عکس (اختیاری)">
+            <button class="btn btn-sm" id="saveAnnouncementBtn"><i class="fas fa-save"></i> ذخیره</button>
+
+            <h3>🏆 افزودن تورنمنت</h3>
+            <input type="text" id="tournamentName" placeholder="نام تورنمنت">
+            <input type="text" id="tournamentDate" placeholder="تاریخ">
+            <textarea id="tournamentDesc" placeholder="توضیحات"></textarea>
+            <button class="btn btn-sm" id="addTournamentBtn"><i class="fas fa-plus"></i> افزودن</button>
+
+            <h3>⚔️ افزودن گارد/اکیپ</h3>
+            <input type="text" id="teamName" placeholder="نام گارد/اکیپ">
+            <input type="text" id="teamLink" placeholder="لینک">
+            <textarea id="teamDesc" placeholder="توضیحات"></textarea>
+            <button class="btn btn-sm" id="addTeamBtn"><i class="fas fa-plus"></i> افزودن</button>
+          </div>
+
+          <div id="modSection" style="display:none;">
+            <hr style="border-color:#333; margin:20px 0;">
+            <h3>🗑️ مدیریت پست‌ها (حذف)</h3>
+            <div id="modPostsList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    <i class="far fa-gem"></i> فایت کلاب | <span class="dev-text">Team Null</span> | سازنده: <span style="color:#c084fc;">استاد امیر</span>
+  </div>
+</div>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="side-menu" id="sideMenu">
+  <div class="menu-item" data-page="home"><i class="fas fa-home"></i> خانه</div>
+  <div class="menu-item" data-page="links"><i class="fas fa-link"></i> لینک‌ها</div>
+  <div class="menu-item" data-page="admins"><i class="fas fa-user-shield"></i> ادمین‌ها</div>
+  <div class="menu-item" data-page="posts"><i class="fas fa-comments"></i> پست‌های کاربران</div>
+  <div class="menu-item" data-page="teams"><i class="fas fa-users"></i> گاردها و اکیپ‌ها</div>
+  <div class="menu-item" data-page="tournaments"><i class="fas fa-trophy"></i> تورنمنت‌ها</div>
+  <div class="menu-item" data-page="about"><i class="fas fa-info-circle"></i> درباره ما</div>
+  <div class="menu-item" data-page="honor"><i class="fas fa-medal"></i> تالار افتخارات</div>
+  <div class="menu-item" data-page="news"><i class="fas fa-bullhorn"></i> اخبار</div>
+  <div class="menu-item" data-page="admin"><i class="fas fa-lock"></i> پنل مدیریت</div>
+</div>
+
+<div class="music-player" id="musicPlayer">
+  <button class="music-btn" id="toggleMusicBtn"><i class="fas fa-play" id="musicIcon"></i></button>
+  <span>🎵 موزیک</span>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+  (function() {
+    // ==================== کانفیگ ====================
+    const BIN_ID = '6a24248cda38895dfe90f52d';
+    const MASTER_KEY = '$2a$10$b8kT5W3i0xFjCiZx3j7xceNqdXh3.H7ZRtSSBebxDa7geaKGiR46e';
+    const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+    // ۴۰ کد تیک آبی
+    const BLUE_TICK_CODES = [
+      'FCBLUE001', 'FCBLUE002', 'FCBLUE003', 'FCBLUE004', 'FCBLUE005',
+      'FCBLUE006', 'FCBLUE007', 'FCBLUE008', 'FCBLUE009', 'FCBLUE010',
+      'FCBLUE011', 'FCBLUE012', 'FCBLUE013', 'FCBLUE014', 'FCBLUE015',
+      'FCBLUE016', 'FCBLUE017', 'FCBLUE018', 'FCBLUE019', 'FCBLUE020',
+      'FCBLUE021', 'FCBLUE022', 'FCBLUE023', 'FCBLUE024', 'FCBLUE025',
+      'FCBLUE026', 'FCBLUE027', 'FCBLUE028', 'FCBLUE029', 'FCBLUE030',
+      'FCBLUE031', 'FCBLUE032', 'FCBLUE033', 'FCBLUE034', 'FCBLUE035',
+      'FCBLUE036', 'FCBLUE037', 'FCBLUE038', 'FCBLUE039', 'FCBLUE040'
+    ];
+
+    const OWNER_PASSWORD = 'ostadamir35nod';
+    const MOD_PASSWORD = 'adminfightclub27492';
+
+    // ==================== وضعیت ====================
+    let adminLevel = localStorage.getItem('fc_admin_level') || ''; // 'owner' یا 'mod'
+    let remoteData = {
+      announcement: null,
+      tournaments: [],
+      posts: [],
+      teams: [],
+      postingEnabled: true,
+      blueTickUsers: []
+    };
+
+    // ==================== المان‌ها ====================
+    const pages = document.querySelectorAll('.page');
+    const menu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('menuOverlay');
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function getBlueTickUsers() {
+      return JSON.parse(localStorage.getItem('fc_blue_users') || '[]');
+    }
+
+    function saveBlueTickUsers(users) {
+      localStorage.setItem('fc_blue_users', JSON.stringify(users));
+    }
+
+    // ==================== API ====================
+    async function fetchBin() {
+      try {
+        const res = await fetch(API_URL + '/latest', { headers: { 'X-Master-Key': MASTER_KEY } });
+        if (!res.ok) throw new Error('خطا');
+        const data = await res.json();
+        remoteData = { ...remoteData, ...data.record };
+        if (remoteData.postingEnabled === undefined) remoteData.postingEnabled = true;
+        if (!Array.isArray(remoteData.teams)) remoteData.teams = [];
+        return true;
+      } catch (e) { return false; }
+    }
+
+    async function updateBin() {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': MASTER_KEY },
+          body: JSON.stringify(remoteData)
+        });
+        return res.ok;
+      } catch (e) { return false; }
+    }
+
+    // ==================== نمایش ====================
+    function renderAnnouncement() {
+      const container = document.getElementById('announcementContainer');
+      if (!container) return;
+      if (!remoteData.announcement) { container.innerHTML = ''; return; }
+      let html = '<div class="announcement-box"><h4>📢 اطلاعیه</h4>';
+      html += `<p>${escapeHtml(remoteData.announcement.text || '')}</p>`;
+      if (remoteData.announcement.image) html += `<img src="${escapeHtml(remoteData.announcement.image)}">`;
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function renderTournaments() {
+      const container = document.getElementById('tournamentsContent');
+      if (!container) return;
+      if (!remoteData.tournaments.length) {
+        container.innerHTML = '<div class="no-posts">هیچ تورنمنتی ثبت نشده</div>';
+        return;
+      }
+      container.innerHTML = remoteData.tournaments.map(t => `
+        <div class="tournament-item">
+          <h4>${escapeHtml(t.name)}</h4>
+          <p>📅 ${escapeHtml(t.date)}</p>
+          <p>${escapeHtml(t.desc)}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderTeams() {
+      const container = document.getElementById('teamsContent');
+      if (!container) return;
+      if (!remoteData.teams.length) {
+        container.innerHTML = '<div class="no-posts">هیچ گارد/اکیپی ثبت نشده</div>';
+        return;
+      }
+      container.innerHTML = remoteData.teams.map(t => `
+        <div class="team-card">
+          <h4>${escapeHtml(t.name)}</h4>
+          <p>${escapeHtml(t.desc)}</p>
+          ${t.link ? `<a href="${escapeHtml(t.link)}" target="_blank">🔗 ${escapeHtml(t.link)}</a>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function renderPostsPage() {
+      const container = document.getElementById('postsContent');
+      if (!container) return;
+
+      const blueUsers = getBlueTickUsers();
+      const userHasBlueTick = blueUsers.includes(localStorage.getItem('fc_username'));
+
+      let formHtml = '';
+      if (remoteData.postingEnabled) {
+        formHtml = `
+          <div class="post-form-card">
+            <input type="text" id="postAuthor" placeholder="👤 نام خود را وارد کنید..." value="${localStorage.getItem('fc_username') || ''}" style="margin-bottom:10px;">
+            ${userHasBlueTick ? '<span style="color:#1d9bf0;">✓ تیک آبی دارید</span>' : '<button class="btn btn-sm" id="useBlueCodeBtn" style="margin-right:10px;">🎫 وارد کردن کد تیک آبی</button>'}
+            <textarea id="postText" placeholder="✍️ پست خود را بنویسید..." maxlength="500"></textarea>
+            <button class="btn" id="publishPostBtn"><i class="fas fa-paper-plane"></i> ارسال</button>
+          </div>
+        `;
+      } else {
+        formHtml = '<div class="no-posts">🔒 پست‌گذاری موقتاً غیرفعال است</div>';
+      }
+
+      container.innerHTML = formHtml + '<div class="posts-feed" id="postsFeed"></div>';
+
+      if (remoteData.postingEnabled) {
+        document.getElementById('publishPostBtn')?.addEventListener('click', async () => {
+          const author = document.getElementById('postAuthor').value.trim();
+          const text = document.getElementById('postText').value.trim();
+          if (!author) return alert('نام را وارد کنید');
+          if (!text) return alert('متن پست را وارد کنید');
+          
+          localStorage.setItem('fc_username', author);
+          
+          const hasBlue = getBlueTickUsers().includes(author);
+          
+          remoteData.posts.push({
+            userName: author,
+            content: text,
+            timestamp: Date.now(),
+            likes: 0,
+            likedBy: [],
+            hasBlueTick: hasBlue
+          });
+          
+          if (await updateBin()) {
+            document.getElementById('postText').value = '';
+            renderPostsFeed();
+          } else alert('خطا در ذخیره');
+        });
+
+        document.getElementById('useBlueCodeBtn')?.addEventListener('click', () => {
+          const code = prompt('کد تیک آبی خود را وارد کنید:');
+          if (!code) return;
+          const idx = BLUE_TICK_CODES.indexOf(code.toUpperCase());
+          if (idx !== -1) {
+            const username = document.getElementById('postAuthor').value.trim() || prompt('نام کاربری خود را وارد کنید:');
+            if (!username) return;
+            const users = getBlueTickUsers();
+            if (!users.includes(username)) {
+              users.push(username);
+              saveBlueTickUsers(users);
+              localStorage.setItem('fc_username', username);
+              alert('✅ تیک آبی فعال شد!');
+              renderPostsPage();
+            } else alert('⚠️ قبلاً تیک آبی دارید');
+          } else alert('❌ کد نامعتبر');
+        });
+      }
+
+      renderPostsFeed();
+    }
+
+    function renderPostsFeed() {
+      const feed = document.getElementById('postsFeed');
+      if (!feed) return;
+      if (!remoteData.posts.length) {
+        feed.innerHTML = '<div class="no-posts">هنوز پستی وجود ندارد</div>';
+        return;
+      }
+      feed.innerHTML = [...remoteData.posts].reverse().map(p => `
+        <div class="post-card">
+          <div class="post-header">
+            <div class="user-avatar">${(p.userName||'?')[0].toUpperCase()}</div>
+            <div>
+              <div class="user-name">
+                ${escapeHtml(p.userName)}
+                ${p.hasBlueTick ? '<i class="fas fa-check-circle blue-tick"></i>' : ''}
+              </div>
+              <div class="post-time">${new Date(p.timestamp).toLocaleString('fa-IR')}</div>
+            </div>
+          </div>
+          <div class="post-content">${escapeHtml(p.content)}</div>
+          <div class="post-actions">
+            <button class="action-btn like-btn ${p.likedBy?.includes(localStorage.getItem('fc_username')) ? 'liked' : ''}" onclick="window.toggleLike('${p.timestamp}')">
+              <i class="${p.likedBy?.includes(localStorage.getItem('fc_username')) ? 'fas' : 'far'} fa-heart"></i> ${p.likes||0}
+            </button>
+            <button class="action-btn" onclick="window.copyPost('${escapeHtml(p.content).replace(/'/g,"\\'")}')">
+              <i class="far fa-copy"></i>
+            </button>
+            ${adminLevel ? `<button class="action-btn delete-btn" onclick="window.deletePost('${p.timestamp}')"><i class="fas fa-trash"></i></button>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.toggleLike = async function(timestamp) {
+      const username = localStorage.getItem('fc_username') || 'کاربر';
+      const post = remoteData.posts.find(p => p.timestamp.toString() === timestamp.toString());
+      if (!post) return;
+      if (!post.likedBy) post.likedBy = [];
+      if (post.likedBy.includes(username)) {
+        post.likes--;
+        post.likedBy = post.likedBy.filter(u => u !== username);
+      } else {
+        post.likes++;
+        post.likedBy.push(username);
+      }
+      await updateBin();
+      renderPostsFeed();
+    };
+
+    window.copyPost = function(text) {
+      navigator.clipboard.writeText(text);
+      alert('✅ کپی شد');
+    };
+
+    window.deletePost = async function(timestamp) {
+      if (!adminLevel) return;
+      if (!confirm('حذف شود؟')) return;
+      remoteData.posts = remoteData.posts.filter(p => p.timestamp.toString() !== timestamp.toString());
+      await updateBin();
+      renderPostsFeed();
+      renderModPostsList();
+    };
+
+    // ==================== پنل مدیریت ====================
+    function renderAdminPage() {
+      const loginForm = document.getElementById('adminLoginForm');
+      const panel = document.getElementById('adminPanel');
+      const ownerSection = document.getElementById('ownerSection');
+      const modSection = document.getElementById('modSection');
+      const roleName = document.getElementById('adminRoleName');
+
+      if (adminLevel === 'owner') {
+        loginForm.style.display = 'none';
+        panel.style.display = 'block';
+        ownerSection.style.display = 'block';
+        modSection.style.display = 'block';
+        roleName.textContent = '(مالک)';
+        document.getElementById('postingToggle').checked = remoteData.postingEnabled;
+        renderCodeList();
+        renderModPostsList();
+      } else if (adminLevel === 'mod') {
+        loginForm.style.display = 'none';
+        panel.style.display = 'block';
+        ownerSection.style.display = 'none';
+        modSection.style.display = 'block';
+        roleName.textContent = '(ادمین)';
+        renderModPostsList();
+      } else {
+        loginForm.style.display = 'block';
+        panel.style.display = 'none';
+        ownerSection.style.display = 'none';
+        modSection.style.display = 'none';
+      }
+    }
+
+    function renderCodeList() {
+      const container = document.getElementById('codeList');
+      if (!container) return;
+      const usedCodes = JSON.parse(localStorage.getItem('fc_used_codes') || '[]');
+      container.innerHTML = BLUE_TICK_CODES.map(c => 
+        `<span style="display:inline-block; margin:4px; padding:4px 8px; background:${usedCodes.includes(c)?'#22c55e33':'#333'}; border-radius:6px; font-size:0.8rem;">${c} ${usedCodes.includes(c)?'✅':''}</span>`
+      ).join('');
+    }
+
+    function renderModPostsList() {
+      const container = document.getElementById('modPostsList');
+      if (!container) return;
+      if (!remoteData.posts.length) {
+        container.innerHTML = '<p>هیچ پستی نیست</p>';
+        return;
+      }
+      container.innerHTML = remoteData.posts.map(p => `
+        <div style="background:#251a2b; padding:10px; border-radius:8px; margin:5px 0; display:flex; justify-content:space-between;">
+          <span>${escapeHtml(p.userName)}: ${escapeHtml(p.content.substring(0,40))}...</span>
+          <button class="action-btn delete-btn" onclick="window.deletePost('${p.timestamp}')"><i class="fas fa-trash"></i></button>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('adminLoginBtn').addEventListener('click', () => {
+      const pass = document.getElementById('adminPassword').value.trim();
+      if (pass === OWNER_PASSWORD) {
+        adminLevel = 'owner';
+        localStorage.setItem('fc_admin_level', 'owner');
+        document.getElementById('adminPassword').value = '';
+        alert('✅ خوش آمدید مالک');
+        renderAdminPage();
+      } else if (pass === MOD_PASSWORD) {
+        adminLevel = 'mod';
+        localStorage.setItem('fc_admin_level', 'mod');
+        document.getElementById('adminPassword').value = '';
+        alert('✅ خوش آمدید ادمین');
+        renderAdminPage();
+      } else {
+        alert('❌ رمز اشتباه');
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      adminLevel = '';
+      localStorage.removeItem('fc_admin_level');
+      renderAdminPage();
+      renderPostsPage();
+    });
+
+    document.getElementById('postingToggle')?.addEventListener('change', async function() {
+      remoteData.postingEnabled = this.checked;
+      await updateBin();
+      renderPostsPage();
+    });
+
+    document.getElementById('saveAnnouncementBtn')?.addEventListener('click', async () => {
+      const text = document.getElementById('announcementText').value.trim();
+      const image = document.getElementById('announcementImageUrl').value.trim();
+      if (!text && !image) return alert('متن یا آدرس عکس را وارد کنید');
+      remoteData.announcement = { text, image };
+      if (await updateBin()) {
+        alert('✅ ذخیره شد');
+        renderAnnouncement();
+      } else alert('❌ خطا');
+    });
+
+    document.getElementById('addTournamentBtn')?.addEventListener('click', async () => {
+      const name = document.getElementById('tournamentName').value.trim();
+      const date = document.getElementById('tournamentDate').value.trim();
+      const desc = document.getElementById('tournamentDesc').value.trim();
+      if (!name || !date) return alert('نام و تاریخ الزامی است');
+      remoteData.tournaments.push({ name, date, desc });
+      if (await updateBin()) {
+        ['tournamentName','tournamentDate','tournamentDesc'].forEach(id => document.getElementById(id).value = '');
+        alert('✅ افزوده شد');
+        renderTournaments();
+      } else alert('❌ خطا');
+    });
+
+    document.getElementById('addTeamBtn')?.addEventListener('click', async () => {
+      const name = document.getElementById('teamName').value.trim();
+      const link = document.getElementById('teamLink').value.trim();
+      const desc = document.getElementById('teamDesc').value.trim();
+      if (!name) return alert('نام الزامی است');
+      remoteData.teams.push({ name, link, desc });
+      if (await updateBin()) {
+        ['teamName','teamLink','teamDesc'].forEach(id => document.getElementById(id).value = '');
+        alert('✅ افزوده شد');
+        renderTeams();
+      } else alert('❌ خطا');
+    });
+
+    // ==================== منو ====================
+    document.getElementById('menuToggleBtn').addEventListener('click', () => {
+      menu.classList.toggle('active');
+      overlay.classList.toggle('show');
+    });
+    overlay.addEventListener('click', () => {
+      menu.classList.remove('active');
+      overlay.classList.remove('show');
+    });
+
+    function switchPage(pageId) {
+      pages.forEach(p => p.classList.remove('active-page'));
+      const target = document.getElementById(pageId + 'Page');
+      if (target) target.classList.add('active-page');
+      menu.classList.remove('active');
+      overlay.classList.remove('show');
+      if (pageId === 'home') renderAnnouncement();
+      else if (pageId === 'posts') renderPostsPage();
+      else if (pageId === 'tournaments') renderTournaments();
+      else if (pageId === 'teams') renderTeams();
+      else if (pageId === 'admin') renderAdminPage();
+    }
+
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', () => switchPage(item.dataset.page));
+    });
+
+    // ==================== موزیک ====================
+    const bgMusic = document.getElementById('bgMusic');
+    const musicIcon = document.getElementById('musicIcon');
+    let musicPlaying = false;
+    document.getElementById('toggleMusicBtn').addEventListener('click', () => {
+      musicPlaying ? (bgMusic.pause(), musicIcon.className='fas fa-play') 
+                    : (bgMusic.play(), musicIcon.className='fas fa-pause');
+      musicPlaying = !musicPlaying;
+    });
+    bgMusic.volume = 0.25;
+
+    // ==================== کپی آیدی ====================
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText('@link_fight_club_ble');
+      alert('✅ کپی شد');
+    });
+
+    // ==================== راه‌اندازی ====================
+    fetchBin().then(() => {
+      renderAnnouncement();
+      renderTournaments();
+      renderTeams();
+      renderPostsPage();
+      renderAdminPage();
+    });
+  })();
+</script>
+</body>
+</html>
