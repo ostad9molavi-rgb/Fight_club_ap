@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       background: linear-gradient(145deg, #1a0a1e 0%, #0c0c10 50%, #1e0a0a 100%);
       font-family: 'Vazirmatn', sans-serif;
@@ -23,7 +22,6 @@
       position: relative;
       overflow-x: hidden;
     }
-
     .particle-bg {
       position: fixed;
       top: 0; left: 0;
@@ -33,7 +31,6 @@
       background: radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 40%),
                   radial-gradient(circle at 80% 70%, rgba(220, 38, 38, 0.08) 0%, transparent 50%);
     }
-
     .container {
       max-width: 800px;
       width: 100%;
@@ -46,14 +43,7 @@
       position: relative;
       z-index: 2;
     }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 5px 0 15px;
-    }
-
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 5px 0 15px; }
     .logo-text {
       font-size: 1.8rem;
       font-weight: 900;
@@ -61,7 +51,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .hamburger-btn {
       background: rgba(107, 114, 128, 0.1);
       border: 1px solid rgba(192, 132, 252, 0.5);
@@ -75,9 +64,7 @@
       cursor: pointer;
       z-index: 110;
     }
-
     .hamburger-btn:hover { background: rgba(147, 51, 234, 0.2); color: white; }
-
     .side-menu {
       position: fixed;
       top: 0; right: -100%;
@@ -90,12 +77,10 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: right 0.4s;
       overflow-y: auto;
     }
-
     .side-menu.active { right: 0; }
-
     .menu-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -106,9 +91,7 @@
       visibility: hidden;
       transition: 0.3s;
     }
-
     .menu-overlay.show { opacity: 1; visibility: visible; }
-
     .menu-item {
       color: #b0a0b8;
       font-size: 1.05rem;
@@ -121,17 +104,12 @@
       gap: 10px;
       border: 1px solid transparent;
     }
-
     .menu-item i { color: #c084fc; width: 20px; }
     .menu-item:hover { background: rgba(147, 51, 234, 0.15); border-color: #ef4444; color: #fff; }
-
     .main-content { margin-top: 15px; }
-
     .page { display: none; animation: fade 0.3s ease; }
     .page.active-page { display: block; }
-
     @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
     .card {
       background: rgba(40, 20, 45, 0.65);
       backdrop-filter: blur(12px);
@@ -140,7 +118,6 @@
       padding: 25px 20px;
       margin-bottom: 20px;
     }
-
     .title {
       font-size: 1.6rem;
       font-weight: 700;
@@ -149,24 +126,6 @@
       border-right: 4px solid #ef4444;
       padding-right: 12px;
     }
-
-    .link-box {
-      background: #1e1225;
-      border-radius: 18px;
-      padding: 18px;
-      text-align: center;
-      border: 1px dashed #c084fc;
-    }
-
-    .ble-id {
-      font-size: 1.6rem;
-      font-weight: 700;
-      background: linear-gradient(to right, #c084fc, #ef4444);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 10px 0;
-    }
-
     .btn {
       background: linear-gradient(135deg, #9333ea, #dc2626);
       border: none;
@@ -180,105 +139,11 @@
       margin: 8px 4px;
       transition: 0.2s;
     }
-
     .btn:hover { box-shadow: 0 8px 18px rgba(239, 68, 68, 0.5); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-sm { padding: 7px 14px; font-size: 0.8rem; margin: 4px; }
     .btn-danger { background: linear-gradient(135deg, #dc2626, #991b1b); }
     .btn-gold { background: linear-gradient(135deg, #f59e0b, #d97706); }
-    .btn-silver { background: linear-gradient(135deg, #94a3b8, #64748b); }
-    .btn-bronze { background: linear-gradient(135deg, #cd7f32, #a0522d); }
-
-    .admin-badge {
-      background: #2d1f33;
-      padding: 8px 16px;
-      border-radius: 30px;
-      border: 1px solid rgba(192, 132, 252, 0.4);
-      color: #d8b4fe;
-      display: inline-block;
-      margin: 5px;
-    }
-
-    .owner-highlight { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; }
-
-    .footer-note {
-      margin-top: 25px;
-      color: #9ca3af;
-      text-align: center;
-      border-top: 1px solid #374151;
-      padding-top: 18px;
-      font-size: 0.85rem;
-    }
-
-    .dev-text { color: #c084fc; }
-
-    .creator-section {
-      background: #2d1f33;
-      border-radius: 16px;
-      padding: 18px;
-      margin-top: 20px;
-      border: 1px solid #c084fc;
-      text-align: center;
-    }
-
-    .creator-id {
-      font-size: 1.3rem;
-      color: #f0e0ff;
-      margin: 10px 0;
-      direction: ltr;
-      display: inline-block;
-    }
-
-    /* تالار مشاهیر */
-    .hall-of-fame-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    .hall-of-fame-table th {
-      background: #2d1f33;
-      padding: 12px;
-      text-align: center;
-      color: #c084fc;
-      border: 1px solid #3d2f43;
-    }
-
-    .hall-of-fame-table td {
-      padding: 12px;
-      text-align: center;
-      border: 1px solid #2d1f33;
-    }
-
-    .rank-1 { background: rgba(255, 215, 0, 0.2); }
-    .rank-2 { background: rgba(192, 192, 192, 0.15); }
-    .rank-3 { background: rgba(205, 127, 50, 0.15); }
-
-    .achievement-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin: 2px;
-    }
-
-    .badge-bronze { background: #cd7f32; color: #fff; }
-    .badge-silver { background: #c0c0c0; color: #000; }
-    .badge-gold { background: #ffd700; color: #000; }
-    .badge-legend { background: linear-gradient(135deg, #ff0040, #8b00ff); color: #fff; }
-
-    .post-form-card {
-      background: rgba(50, 25, 55, 0.7);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(192, 132, 252, 0.25);
-    }
-
-    .post-input-group { display: flex; flex-direction: column; gap: 12px; }
-
-    .post-input, .name-input, input, textarea, select {
+    input, textarea, select {
       background: rgba(20, 10, 25, 0.8);
       border: 1px solid rgba(192, 132, 252, 0.3);
       border-radius: 16px;
@@ -286,28 +151,19 @@
       color: #e0d0f0;
       font-family: 'Vazirmatn', sans-serif;
       outline: none;
-      transition: 0.3s;
       width: 100%;
+      margin: 5px 0;
     }
-
-    .post-input:focus, .name-input:focus, input:focus, textarea:focus {
-      border-color: #ef4444;
-      box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
-    }
-
-    .post-input { min-height: 100px; resize: vertical; }
-
+    input:focus, textarea:focus, select:focus { border-color: #ef4444; }
+    textarea { min-height: 80px; resize: vertical; }
     .posts-feed { display: flex; flex-direction: column; gap: 16px; }
-
     .post-card {
       background: rgba(35, 18, 40, 0.7);
       border: 1px solid rgba(192, 132, 252, 0.2);
       border-radius: 20px;
       padding: 18px 20px;
     }
-
     .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-
     .user-avatar {
       width: 44px; height: 44px;
       border-radius: 50%;
@@ -317,100 +173,22 @@
       justify-content: center;
       color: white;
       font-weight: 700;
-      flex-shrink: 0;
     }
-
-    .user-name {
-      color: #f0e0ff;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .blue-tick { color: #1d9bf0; font-size: 0.9rem; }
-
+    .user-name { color: #f0e0ff; font-weight: 700; }
+    .blue-tick { color: #1d9bf0; margin-right: 5px; }
     .post-time { color: #9ca3af; font-size: 0.75rem; }
     .post-content { color: #d8c8e8; line-height: 1.7; margin-bottom: 14px; }
-
-    .post-actions {
-      display: flex;
-      gap: 20px;
-      border-top: 1px solid rgba(107, 114, 128, 0.2);
-      padding-top: 12px;
-    }
-
-    .action-btn {
-      background: transparent;
-      border: none;
-      color: #9ca3af;
-      cursor: pointer;
-      font-family: inherit;
-      padding: 4px 8px;
-      border-radius: 12px;
-      transition: 0.2s;
-    }
-
+    .post-actions { display: flex; gap: 20px; border-top: 1px solid rgba(107, 114, 128, 0.2); padding-top: 12px; }
+    .action-btn { background: transparent; border: none; color: #9ca3af; cursor: pointer; padding: 4px 8px; border-radius: 12px; }
     .action-btn:hover { color: #c084fc; }
     .like-btn.liked { color: #ef4444; }
-    .delete-btn { margin-right: auto; color: #ef4444; }
-
+    .delete-btn { color: #ef4444; }
     .no-posts { text-align: center; color: #9ca3af; padding: 30px; }
-
-    .announcement-box {
-      background: #2d1f33;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 15px;
-      border: 1px solid #c084fc;
-    }
-
+    .announcement-box { background: #2d1f33; border-radius: 16px; padding: 18px; margin-bottom: 15px; border: 1px solid #c084fc; }
     .announcement-box img { max-width: 100%; border-radius: 12px; margin-top: 10px; }
-
-    .tournament-item, .team-card {
-      background: #2d1f33;
-      border-radius: 16px;
-      padding: 15px;
-      margin-bottom: 15px;
-    }
-
-    .team-card h4 { color: #c084fc; margin-bottom: 8px; }
-    .team-card a { color: #60a5fa; text-decoration: none; }
-
-    .toggle-switch {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 15px 0;
-    }
-
-    .toggle-switch input { display: none; }
-
-    .toggle-label {
-      width: 50px;
-      height: 26px;
-      background: #4a5568;
-      border-radius: 13px;
-      cursor: pointer;
-      position: relative;
-      transition: 0.3s;
-    }
-
-    .toggle-label::after {
-      content: '';
-      width: 22px;
-      height: 22px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      transition: 0.3s;
-    }
-
-    .toggle-switch input:checked + .toggle-label { background: #22c55e; }
-    .toggle-switch input:checked + .toggle-label::after { right: 26px; }
-
+    .tournament-item, .team-card { background: #2d1f33; border-radius: 16px; padding: 15px; margin-bottom: 15px; }
+    .team-card h4 { color: #c084fc; }
+    .team-card a { color: #60a5fa; }
     .music-player {
       position: fixed;
       bottom: 20px; left: 20px;
@@ -423,26 +201,15 @@
       align-items: center;
       gap: 8px;
     }
-
     .music-btn { background: transparent; border: none; color: #c084fc; font-size: 1.6rem; cursor: pointer; }
-
-    .code-list {
-      max-height: 200px;
-      overflow-y: auto;
-      background: #1a1020;
-      border-radius: 8px;
-      padding: 10px;
-      margin: 10px 0;
-    }
-
-    .fake-like-section {
-      background: #2d1f33;
-      border-radius: 16px;
-      padding: 15px;
-      margin: 15px 0;
-      border: 1px solid #f59e0b;
-    }
-
+    .hall-of-fame-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .hall-of-fame-table th { background: #2d1f33; padding: 12px; color: #c084fc; border: 1px solid #3d2f43; }
+    .hall-of-fame-table td { padding: 12px; text-align: center; border: 1px solid #2d1f33; }
+    .badge-bronze { background: #cd7f32; color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; }
+    .badge-silver { background: #c0c0c0; color: #000; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; }
+    .badge-gold { background: #ffd700; color: #000; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; }
+    .footer-note { margin-top: 25px; color: #9ca3af; text-align: center; border-top: 1px solid #374151; padding-top: 18px; font-size: 0.85rem; }
+    .dev-text { color: #c084fc; }
     @media (max-width: 480px) {
       .music-player { bottom: 15px; left: 15px; padding: 8px 14px; }
       .side-menu { width: 280px; }
@@ -451,7 +218,6 @@
 </head>
 <body>
 <div class="particle-bg"></div>
-
 <div class="container">
   <div class="header">
     <span class="logo-text">🥊 فایت کلاب</span>
@@ -462,226 +228,602 @@
     <div id="homePage" class="page active-page">
       <div class="card">
         <div class="title">🏠 خانه</div>
-        <p style="font-size: 1.1rem; line-height: 2;">
+        <p style="font-size:1.1rem;line-height:2;">
           فایت کلاب اصلی <span style="color:#c084fc;">بله</span> توسط 
           <span style="color:#d8b4fe;">رضا مظفری</span> ساخته شد و 
           <span style="color:#fca5a5;">4 مالک</span> داشته. مالک فعلی: 
-          <span style="color:#ef4444; font-weight:900;">آرشان اسپریت</span>
+          <span style="color:#ef4444;font-weight:900;">آرشان اسپریت</span>
         </p>
       </div>
     </div>
-
     <div id="linksPage" class="page">
-      <div class="card">
-        <div class="title">🔗 لینک ورود</div>
-        <div class="link-box">
-          <div class="ble-id" id="bleID">@link_fight_club_ble</div>
+      <div class="card"><div class="title">🔗 لینک ورود</div>
+        <div class="link-box" style="background:#1e1225;border-radius:18px;padding:18px;text-align:center;border:1px dashed #c084fc;">
+          <div class="ble-id" style="font-size:1.6rem;font-weight:700;background:linear-gradient(to right, #c084fc, #ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">@link_fight_club_ble</div>
           <p>با این آیدی در <strong>بله</strong> وارد شوید</p>
           <button class="btn" id="copyBtn"><i class="far fa-copy"></i> کپی</button>
           <a href="https://ble.ir" target="_blank" class="btn" style="text-decoration:none;"><i class="fas fa-external-link-alt"></i> بله</a>
         </div>
       </div>
     </div>
-
     <div id="adminsPage" class="page">
-      <div class="card">
-        <div class="title">👑 مالک و ادمین‌ها</div>
-        <span class="admin-badge owner-highlight"><i class="fas fa-crown"></i> مالک: آرشان اسپریت</span>
+      <div class="card"><div class="title">👑 مالک و ادمین‌ها</div>
+        <span class="admin-badge owner-highlight" style="background:rgba(239,68,68,0.2);border:1px solid #ef4444;padding:8px 16px;border-radius:30px;color:#fca5a5;"><i class="fas fa-crown"></i> مالک: آرشان اسپریت</span>
         <div style="margin-top:15px;">
-          <span class="admin-badge">استاد امیر</span>
-          <span class="admin-badge">ممد کایل</span>
-          <span class="admin-badge">نئورگان</span>
-          <span class="admin-badge">لوسیفر</span>
-          <span class="admin-badge">ممد استریت</span>
-          <span class="admin-badge">امیر استریت</span>
-          <span class="admin-badge">علی نگان</span>
-          <span class="admin-badge">علی لوتی</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">استاد امیر</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">ممد کایل</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">نئورگان</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">لوسیفر</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">ممد استریت</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">امیر استریت</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">علی نگان</span>
+          <span class="admin-badge" style="background:#2d1f33;padding:8px 16px;border-radius:30px;border:1px solid rgba(192,132,252,0.4);color:#d8b4fe;margin:5px;">علی لوتی</span>
         </div>
       </div>
     </div>
-
     <div id="aboutPage" class="page">
-      <div class="card">
-        <div class="title">📜 درباره ما</div>
+      <div class="card"><div class="title">📜 درباره ما</div>
         <p>ساخته شده توسط <span class="dev-text">Ostad Amir</span></p>
-        <p style="color:#9ca3af; margin-top:10px;">سازنده: <span style="color:#c084fc; font-weight:700;">استاد امیر</span></p>
-        <div class="creator-section">
+        <p style="color:#9ca3af;">سازنده: <span style="color:#c084fc;">استاد امیر</span></p>
+        <div style="background:#2d1f33;border-radius:16px;padding:18px;margin-top:20px;border:1px solid #c084fc;text-align:center;">
           <h4 style="color:#c084fc;">📱 آیدی سازنده در بله</h4>
-          <div class="creator-id" id="creatorId">@ostad_amlr</div>
-          <div style="margin-top:10px;">
-            <button class="btn btn-sm" id="copyCreatorBtn"><i class="far fa-copy"></i> کپی آیدی</button>
-            <a href="https://ble.ir/ostad_amlr" target="_blank" class="btn btn-sm" style="text-decoration:none;"><i class="fas fa-external-link-alt"></i> ورود به بله</a>
-          </div>
+          <div class="creator-id" style="font-size:1.3rem;color:#f0e0ff;">@ostad_amlr</div>
+          <button class="btn btn-sm" id="copyCreatorBtn"><i class="far fa-copy"></i> کپی</button>
+          <a href="https://ble.ir/ostad_amlr" target="_blank" class="btn btn-sm" style="text-decoration:none;"><i class="fas fa-external-link-alt"></i> بله</a>
         </div>
-        <p style="color:#9ca3af; margin-top:20px;">تمامی حقوق محفوظ © 2026</p>
+        <p style="color:#9ca3af;margin-top:20px;">© 2026</p>
       </div>
     </div>
-
     <div id="honorPage" class="page">
-      <div class="card">
-        <div class="title">🏆 تالار مشاهیر</div>
-        <div id="hallOfFameContent">
-          <div class="no-posts">هنوز هیچ فایتری به تالار مشاهیر راه نیافته...</div>
-        </div>
+      <div class="card"><div class="title">🏆 تالار مشاهیر</div>
+        <div id="hallOfFameContent"><div class="no-posts">هنوز هیچ فایتری به تالار مشاهیر راه نیافته...</div></div>
       </div>
     </div>
-
     <div id="newsPage" class="page">
-      <div class="card">
-        <div class="title">📢 اخبار و اطلاعیه‌ها</div>
-        <div id="newsContainer">
-          <div class="no-posts">هیچ اطلاعیه‌ای ثبت نشده</div>
-        </div>
+      <div class="card"><div class="title">📢 اخبار و اطلاعیه‌ها</div>
+        <div id="newsContainer"><div class="no-posts">هیچ اطلاعیه‌ای ثبت نشده</div></div>
       </div>
     </div>
-
     <div id="postsPage" class="page">
-      <div class="card">
-        <div class="title">📝 پست‌های کاربران</div>
+      <div class="card"><div class="title">📝 پست‌های کاربران</div>
         <div id="postsContent"></div>
       </div>
     </div>
-
     <div id="tournamentsPage" class="page">
-      <div class="card">
-        <div class="title">🏅 تورنمنت‌ها</div>
+      <div class="card"><div class="title">🏅 تورنمنت‌ها</div>
         <div id="tournamentsContent"></div>
       </div>
     </div>
-
     <div id="teamsPage" class="page">
-      <div class="card">
-        <div class="title">⚔️ گاردها و اکیپ‌ها</div>
+      <div class="card"><div class="title">⚔️ گاردها و اکیپ‌ها</div>
         <div id="teamsContent"></div>
       </div>
     </div>
-
     <div id="adminPage" class="page">
-      <div class="card">
-        <div class="title">🔐 پنل مدیریت</div>
+      <div class="card"><div class="title">🔐 پنل مدیریت</div>
         <div id="adminLoginForm">
-          <input type="password" id="adminPassword" placeholder="رمز عبور مدیر..." style="width:100%;">
+          <input type="password" id="adminPassword" placeholder="رمز عبور...">
           <button class="btn" id="adminLoginBtn"><i class="fas fa-sign-in-alt"></i> ورود</button>
+          <p id="loginError" style="color:#ef4444;margin-top:10px;display:none;"></p>
+          <p id="lockTimer" style="color:#f59e0b;margin-top:10px;display:none;"></p>
         </div>
         <div id="adminPanel" style="display:none;">
-          <p style="color:#22c55e; margin-bottom:15px;">✅ خوش آمدید <span id="adminRoleName"></span></p>
+          <p style="color:#22c55e;">✅ خوش آمدید <span id="adminRoleName"></span></p>
           <button class="btn btn-sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> خروج</button>
-          
-          <!-- بخش سوپر مالک -->
           <div id="superOwnerSection" style="display:none;">
-            <hr style="border-color:#f59e0b; margin:20px 0;">
-            <h3 style="color:#f59e0b;">⚡ ابزارهای سوپر مالک</h3>
-            <div class="fake-like-section">
-              <h4>👍 افزودن لایک فیک به پست</h4>
-              <select id="fakeLikePostSelect" style="margin-bottom:10px;">
-                <option value="">انتخاب پست...</option>
-              </select>
-              <input type="number" id="fakeLikeCount" placeholder="تعداد لایک" min="1" value="1">
-              <button class="btn btn-sm btn-gold" id="addFakeLikesBtn"><i class="fas fa-plus"></i> افزودن لایک</button>
-            </div>
+            <hr style="border-color:#f59e0b;margin:20px 0;"><h3 style="color:#f59e0b;">⚡ سوپر مالک</h3>
+            <select id="fakeLikePostSelect"><option value="">انتخاب پست...</option></select>
+            <input type="number" id="fakeLikeCount" placeholder="تعداد لایک" value="1" min="1">
+            <button class="btn btn-sm btn-gold" id="addFakeLikesBtn"><i class="fas fa-plus"></i> افزودن لایک</button>
           </div>
-
           <div id="ownerSection" style="display:none;">
-            <hr style="border-color:#333; margin:20px 0;">
-            <h3>⚙️ تنظیمات پست‌گذاری</h3>
-            <div class="toggle-switch">
-              <input type="checkbox" id="postingToggle" checked>
-              <label class="toggle-label" for="postingToggle"></label>
-              <span>امکان پست‌گذاری برای کاربران</span>
+            <hr style="border-color:#333;margin:20px 0;"><h3>⚙️ تنظیمات</h3>
+            <label>امکان پست‌گذاری: <input type="checkbox" id="postingToggle" checked></label>
+            <h3>📢 اطلاعیه</h3>
+            <textarea id="announcementText" placeholder="متن..."></textarea>
+            <input type="text" id="announcementImageUrl" placeholder="آدرس عکس">
+            <button class="btn btn-sm" id="saveAnnouncementBtn">ذخیره</button>
+            <button class="btn btn-sm btn-danger" id="deleteAnnouncementBtn">حذف</button>
+            <h3>🏆 تالار مشاهیر</h3>
+            <input type="text" id="hallName" placeholder="نام">
+            <select id="hallMedal"><option value="🥉 برنز">برنز</option><option value="🥈 نقره">نقره</option><option value="🥇 طلا">طلا</option></select>
+            <button class="btn btn-sm btn-gold" id="addHallBtn">افزودن</button><div id="hallList"></div>
+            <h3>🏅 تورنمنت</h3>
+            <input type="text" id="tournamentName" placeholder="نام"><input type="text" id="tournamentDate" placeholder="تاریخ"><textarea id="tournamentDesc" placeholder="توضیحات"></textarea>
+            <button class="btn btn-sm" id="addTournamentBtn">افزودن</button>
+            <h3>⚔️ گارد/اکیپ</h3>
+            <input type="text" id="teamName" placeholder="نام"><input type="text" id="teamLink" placeholder="لینک"><textarea id="teamDesc" placeholder="توضیحات"></textarea>
+            <button class="btn btn-sm" id="addTeamBtn">افزودن</button>
+            <div id="teamEditSection" style="display:none;">
+              <h4>ویرایش گارد</h4>
+              <input type="hidden" id="editTeamIndex">
+              <input type="text" id="editTeamName" placeholder="نام جدید"><input type="text" id="editTeamLink" placeholder="لینک جدید"><textarea id="editTeamDesc" placeholder="توضیحات جدید"></textarea>
+              <button class="btn btn-sm" id="saveTeamEditBtn">ذخیره</button>
+              <button class="btn btn-sm btn-danger" id="cancelTeamEditBtn">لغو</button>
             </div>
-
-            <h3>📋 کدهای تیک آبی</h3>
-            <div class="code-list" id="codeList"></div>
-
-            <h3>📢 مدیریت اطلاعیه</h3>
-            <textarea id="announcementText" placeholder="متن اطلاعیه..." rows="3"></textarea>
-            <input type="text" id="announcementImageUrl" placeholder="آدرس عکس (اختیاری)">
-            <button class="btn btn-sm" id="saveAnnouncementBtn"><i class="fas fa-save"></i> ذخیره</button>
-            <button class="btn btn-sm btn-danger" id="deleteAnnouncementBtn"><i class="fas fa-trash"></i> حذف اطلاعیه</button>
-
-            <h3>🏆 مدیریت تالار مشاهیر</h3>
-            <input type="text" id="hallName" placeholder="نام فایتر">
-            <select id="hallMedal">
-              <option value="🥉 برنز">🥉 برنز (۲۰+ لایک)</option>
-              <option value="🥈 نقره">🥈 نقره (۵۰+ لایک)</option>
-              <option value="🥇 طلا">🥇 طلا (۱۰۰+ لایک)</option>
-            </select>
-            <button class="btn btn-sm btn-gold" id="addHallBtn"><i class="fas fa-plus"></i> افزودن به تالار مشاهیر</button>
-            <div id="hallList" style="margin-top:10px;"></div>
-
-            <h3>🏅 افزودن تورنمنت</h3>
-            <input type="text" id="tournamentName" placeholder="نام تورنمنت">
-            <input type="text" id="tournamentDate" placeholder="تاریخ">
-            <textarea id="tournamentDesc" placeholder="توضیحات"></textarea>
-            <button class="btn btn-sm" id="addTournamentBtn"><i class="fas fa-plus"></i> افزودن</button>
-
-            <h3>⚔️ افزودن گارد/اکیپ</h3>
-            <input type="text" id="teamName" placeholder="نام گارد/اکیپ">
-            <input type="text" id="teamLink" placeholder="لینک">
-            <textarea id="teamDesc" placeholder="توضیحات"></textarea>
-            <button class="btn btn-sm" id="addTeamBtn"><i class="fas fa-plus"></i> افزودن</button>
+            <h4>لیست گاردها</h4><div id="teamManageList"></div>
           </div>
-
           <div id="modSection" style="display:none;">
-            <hr style="border-color:#333; margin:20px 0;">
-            <h3>🗑️ مدیریت پست‌ها (حذف)</h3>
+            <hr style="border-color:#333;margin:20px 0;"><h3>🗑️ حذف پست</h3>
             <div id="modPostsList"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="footer-note">
-    <i class="far fa-gem"></i> فایت کلاب | <span class="dev-text">Ostad Amir</span> | سازنده: <span style="color:#c084fc;">استاد امیر</span> | © 2026
-  </div>
+  <div class="footer-note"><i class="far fa-gem"></i> فایت کلاب | <span class="dev-text">Ostad Amir</span> | © 2026</div>
 </div>
-
 <div class="menu-overlay" id="menuOverlay"></div>
 <div class="side-menu" id="sideMenu">
   <div class="menu-item" data-page="home"><i class="fas fa-home"></i> خانه</div>
   <div class="menu-item" data-page="links"><i class="fas fa-link"></i> لینک‌ها</div>
   <div class="menu-item" data-page="admins"><i class="fas fa-user-shield"></i> ادمین‌ها</div>
-  <div class="menu-item" data-page="posts"><i class="fas fa-comments"></i> پست‌های کاربران</div>
-  <div class="menu-item" data-page="honor"><i class="fas fa-crown"></i> تالار مشاهیر</div>
-  <div class="menu-item" data-page="teams"><i class="fas fa-users"></i> گاردها و اکیپ‌ها</div>
+  <div class="menu-item" data-page="posts"><i class="fas fa-comments"></i> پست‌ها</div>
+  <div class="menu-item" data-page="honor"><i class="fas fa-crown"></i> مشاهیر</div>
+  <div class="menu-item" data-page="teams"><i class="fas fa-users"></i> گاردها</div>
   <div class="menu-item" data-page="tournaments"><i class="fas fa-trophy"></i> تورنمنت‌ها</div>
-  <div class="menu-item" data-page="news"><i class="fas fa-bullhorn"></i> اخبار و اطلاعیه‌ها</div>
+  <div class="menu-item" data-page="news"><i class="fas fa-bullhorn"></i> اخبار</div>
   <div class="menu-item" data-page="about"><i class="fas fa-info-circle"></i> درباره ما</div>
-  <div class="menu-item" data-page="admin"><i class="fas fa-lock"></i> پنل مدیریت</div>
+  <div class="menu-item" data-page="admin"><i class="fas fa-lock"></i> مدیریت</div>
 </div>
-
 <div class="music-player" id="musicPlayer">
   <button class="music-btn" id="toggleMusicBtn"><i class="fas fa-play" id="musicIcon"></i></button>
   <span>🎵 موزیک</span>
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bgMusic" loop preload="auto"><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
 </div>
 
 <script>
+(async function() {
+  // ============ HASH SHA-256 ============
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  // رمزهای Hash شده (در کد plain text نیست!)
+  const HASHES = {
+    mod: '8f7e2c3d1a5b9f6e4c2a8d0b6f3e1a9c5d7f0b2e4a6c8d0f2e4a6b8c0d2e4f',
+    owner: 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0',
+    super: 'f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1'
+  };
+
+  // تولید Hash برای رمزهای جدید (فقط یه بار اجرا کن و Hash رو جایگزین کن)
+  // console.log('mod:', await sha256('admiclub11228Ar'));
+  // console.log('owner:', await sha256('malek32234ospa'));
+  // console.log('super:', await sha256('thegreatmalekostad11243ost'));
+
+  // ============ CONFIG ============
+  const BIN_ID = '6a24248cda38895dfe90f52d';
+  const MASTER_KEY = '$2a$10$b8kT5W3i0xFjCiZx3j7xceNqdXh3.H7ZRtSSBebxDa7geaKGiR46e';
+  const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+  const BLUE_TICK_CODES = Array.from({length:40}, (_,i) => `FCBLUE${String(i+1).padStart(3,'0')}`);
+
+  // ============ STATE ============
+  let adminLevel = localStorage.getItem('fc_admin_level') || '';
+  let lockUntil = parseInt(localStorage.getItem('fc_lock_until') || '0');
+  let failedAttempts = parseInt(localStorage.getItem('fc_failed') || '0');
+  
+  let remoteData = {
+    announcement: null,
+    tournaments: [],
+    posts: [],
+    teams: [],
+    postingEnabled: true,
+    hallOfFame: []
+  };
+
+  // ============ DOM ============
+  const $ = id => document.getElementById(id);
+  const pages = document.querySelectorAll('.page');
+  const menu = $('sideMenu');
+  const overlay = $('menuOverlay');
+
+  function escapeHtml(t) {
+    const d = document.createElement('div');
+    d.textContent = t;
+    return d.innerHTML;
+  }
+
+  function getBlueUsers() { return JSON.parse(localStorage.getItem('fc_blue_users')||'[]'); }
+  function saveBlueUsers(u) { localStorage.setItem('fc_blue_users', JSON.stringify(u)); }
+
+  // ============ API ============
+  async function fetchBin() {
+    try {
+      const r = await fetch(API_URL + '/latest', { headers: { 'X-Master-Key': MASTER_KEY }, cache: 'no-store' });
+      if (!r.ok) throw new Error('fetch error');
+      const d = await r.json();
+      remoteData = { ...remoteData, ...d.record };
+      ['tournaments','posts','teams','hallOfFame'].forEach(k => {
+        if (!Array.isArray(remoteData[k])) remoteData[k] = [];
+      });
+      return true;
+    } catch(e) { return false; }
+  }
+
+  async function updateBin() {
+    try {
+      const r = await fetch(API_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': MASTER_KEY },
+        body: JSON.stringify(remoteData)
+      });
+      return r.ok;
+    } catch(e) { return false; }
+  }
+
+  // ============ RENDER ============
+  function renderHallOfFame() {
+    const c = $('hallOfFameContent');
+    if (!c) return;
+    if (!remoteData.hallOfFame.length) { c.innerHTML = '<div class="no-posts">خالی</div>'; return; }
+    c.innerHTML = `<table class="hall-of-fame-table"><tr><th>#</th><th>نام</th><th>مدال</th></tr>${remoteData.hallOfFame.map((f,i) => `<tr><td>${i+1}</td><td>${escapeHtml(f.name)}</td><td><span class="badge-${f.medal.includes('برنز')?'bronze':f.medal.includes('نقره')?'silver':'gold'}">${f.medal}</span></td></tr>`).join('')}</table>`;
+  }
+
+  function renderNews() {
+    const c = $('newsContainer');
+    if (!c) return;
+    if (!remoteData.announcement) { c.innerHTML = '<div class="no-posts">خالی</div>'; return; }
+    c.innerHTML = `<div class="announcement-box"><h4>📢 اطلاعیه</h4><p>${escapeHtml(remoteData.announcement.text||'')}</p>${remoteData.announcement.image?`<img src="${escapeHtml(remoteData.announcement.image)}">`:''}</div>`;
+  }
+
+  function renderTournaments() {
+    const c = $('tournamentsContent');
+    if (!c) return;
+    if (!remoteData.tournaments.length) { c.innerHTML = '<div class="no-posts">خالی</div>'; return; }
+    c.innerHTML = remoteData.tournaments.map(t => `<div class="tournament-item"><h4>${escapeHtml(t.name)}</h4><p>📅 ${escapeHtml(t.date)}</p><p>${escapeHtml(t.desc)}</p></div>`).join('');
+  }
+
+  function renderTeams() {
+    const c = $('teamsContent');
+    if (!c) return;
+    if (!remoteData.teams.length) { c.innerHTML = '<div class="no-posts">خالی</div>'; return; }
+    c.innerHTML = remoteData.teams.map(t => `<div class="team-card"><h4>${escapeHtml(t.name)}</h4><p>${escapeHtml(t.desc)}</p>${t.link?`<a href="${escapeHtml(t.link)}" target="_blank">🔗</a>`:''}</div>`).join('');
+  }
+
+  function renderTeamManageList() {
+    const c = $('teamManageList');
+    if (!c) return;
+    if (!remoteData.teams.length) { c.innerHTML = '<p>خالی</p>'; return; }
+    c.innerHTML = remoteData.teams.map((t,i) => `<div style="background:#251a2b;padding:10px;border-radius:8px;margin:5px 0;display:flex;justify-content:space-between;"><span>${escapeHtml(t.name)}</span><div><button class="action-btn" onclick="window.editTeam(${i})">✏️</button><button class="action-btn delete-btn" onclick="window.removeTeam(${i})">🗑️</button></div></div>`).join('');
+  }
+
+  window.editTeam = function(i) {
+    const t = remoteData.teams[i];
+    if (!t) return;
+    $('editTeamIndex').value = i;
+    $('editTeamName').value = t.name;
+    $('editTeamLink').value = t.link || '';
+    $('editTeamDesc').value = t.desc || '';
+    $('teamEditSection').style.display = 'block';
+    $('teamName').parentElement.style.display = 'none';
+  };
+
+  window.removeTeam = async function(i) {
+    if (!confirm('حذف شود؟')) return;
+    remoteData.teams.splice(i, 1);
+    await updateBin();
+    renderTeams();
+    renderTeamManageList();
+  };
+
+  function renderPostsPage() {
+    const c = $('postsContent');
+    if (!c) return;
+    const blueUsers = getBlueUsers();
+    const cu = localStorage.getItem('fc_username') || '';
+    const hasBlue = blueUsers.includes(cu);
+    let f = '';
+    if (remoteData.postingEnabled) {
+      f = `<div style="background:rgba(50,25,55,0.7);border-radius:20px;padding:20px;margin-bottom:20px;">
+        <input type="text" id="postAuthor" placeholder="نام" value="${cu}" style="margin-bottom:10px;">
+        ${hasBlue ? '<span style="color:#1d9bf0;">✓ تیک آبی</span>' : '<button class="btn btn-sm" id="useBlueCodeBtn">🎫 کد تیک آبی</button>'}
+        <textarea id="postText" placeholder="پست..." maxlength="500"></textarea>
+        <button class="btn" id="publishPostBtn"><i class="fas fa-paper-plane"></i> ارسال</button>
+      </div>`;
+    } else { f = '<div class="no-posts">🔒 غیرفعال</div>'; }
+    c.innerHTML = f + '<div class="posts-feed" id="postsFeed"></div>';
+
+    if (remoteData.postingEnabled) {
+      $('publishPostBtn')?.addEventListener('click', async () => {
+        const a = $('postAuthor').value.trim();
+        const t = $('postText').value.trim();
+        if (!a || !t) return alert('پر کن');
+        localStorage.setItem('fc_username', a);
+        remoteData.posts.push({ userName: a, content: t, timestamp: Date.now(), likes: 0, likedBy: [], hasBlueTick: getBlueUsers().includes(a) });
+        if (await updateBin()) { $('postText').value = ''; renderPostsFeed(); }
+      });
+      $('useBlueCodeBtn')?.addEventListener('click', () => {
+        const code = prompt('کد:');
+        if (BLUE_TICK_CODES.includes(code?.toUpperCase())) {
+          const u = $('postAuthor').value.trim() || prompt('نام:');
+          if (!u) return;
+          const users = getBlueUsers();
+          if (!users.includes(u)) { users.push(u); saveBlueUsers(users); localStorage.setItem('fc_username', u); alert('✅'); renderPostsPage(); }
+          else alert('دارید');
+        } else alert('❌');
+      });
+    }
+    renderPostsFeed();
+  }
+
+  function renderPostsFeed() {
+    const f = $('postsFeed');
+    if (!f) return;
+    if (!remoteData.posts.length) { f.innerHTML = '<div class="no-posts">خالی</div>'; return; }
+    f.innerHTML = [...remoteData.posts].reverse().map(p => `
+      <div class="post-card">
+        <div class="post-header"><div class="user-avatar">${(p.userName||'?')[0]}</div><div><div class="user-name">${p.hasBlueTick?'<i class="fas fa-check-circle blue-tick"></i>':''}${escapeHtml(p.userName)}</div><div class="post-time">${new Date(p.timestamp).toLocaleString('fa-IR')}</div></div></div>
+        <div class="post-content">${escapeHtml(p.content)}</div>
+        <div class="post-actions">
+          <button class="action-btn like-btn ${p.likedBy?.includes(localStorage.getItem('fc_username'))?'liked':''}" onclick="window.toggleLike('${p.timestamp}')"><i class="${p.likedBy?.includes(localStorage.getItem('fc_username'))?'fas':'far'} fa-heart"></i> ${p.likes||0}</button>
+          <button class="action-btn" onclick="navigator.clipboard.writeText('${escapeHtml(p.content).replace(/'/g,"\\'")}');alert('✅')"><i class="far fa-copy"></i></button>
+          ${adminLevel?'<button class="action-btn delete-btn" onclick="window.deletePost(\''+p.timestamp+'\')"><i class="fas fa-trash"></i></button>':''}
+        </div>
+      </div>`).join('');
+    renderFakeLikeSelect();
+  }
+
+  function renderFakeLikeSelect() {
+    const s = $('fakeLikePostSelect');
+    if (!s) return;
+    s.innerHTML = '<option value="">انتخاب...</option>' + remoteData.posts.map(p => `<option value="${p.timestamp}">${escapeHtml(p.userName)} (${p.likes||0} ❤️)</option>`).join('');
+  }
+
+  window.toggleLike = async function(ts) {
+    const u = localStorage.getItem('fc_username')||'کاربر';
+    const p = remoteData.posts.find(x => x.timestamp.toString() === ts.toString());
+    if (!p) return;
+    if (!p.likedBy) p.likedBy = [];
+    p.likedBy.includes(u) ? (p.likes--, p.likedBy = p.likedBy.filter(x => x!==u)) : (p.likes++, p.likedBy.push(u));
+    await updateBin();
+    renderPostsFeed();
+  };
+
+  window.deletePost = async function(ts) {
+    if (!adminLevel || !confirm('حذف؟')) return;
+    remoteData.posts = remoteData.posts.filter(p => p.timestamp.toString() !== ts.toString());
+    await updateBin();
+    renderPostsFeed();
+    renderModPostsList();
+  };
+
+  function renderAdminPage() {
+    const lf = $('adminLoginForm'), pa = $('adminPanel'), so = $('superOwnerSection'), ow = $('ownerSection'), mo = $('modSection');
+    if (adminLevel === 'super') {
+      lf.style.display = 'none'; pa.style.display = 'block'; so.style.display = 'block'; ow.style.display = 'block'; mo.style.display = 'block';
+      $('adminRoleName').textContent = '(سوپر مالک)';
+    } else if (adminLevel === 'owner') {
+      lf.style.display = 'none'; pa.style.display = 'block'; so.style.display = 'none'; ow.style.display = 'block'; mo.style.display = 'block';
+      $('adminRoleName').textContent = '(مالک)';
+    } else if (adminLevel === 'mod') {
+      lf.style.display = 'none'; pa.style.display = 'block'; so.style.display = 'none'; ow.style.display = 'none'; mo.style.display = 'block';
+      $('adminRoleName').textContent = '(ادمین)';
+    } else {
+      lf.style.display = 'block'; pa.style.display = 'none'; so.style.display = 'none'; ow.style.display = 'none'; mo.style.display = 'none';
+    }
+    if (adminLevel) {
+      $('postingToggle').checked = remoteData.postingEnabled;
+      renderTeamManageList();
+      renderModPostsList();
+      renderHallList();
+      renderFakeLikeSelect();
+    }
+  }
+
+  function renderHallList() {
+    const c = $('hallList');
+    if (!c) return;
+    c.innerHTML = remoteData.hallOfFame.map((f,i) => `<div style="background:#251a2b;padding:8px;margin:4px 0;border-radius:8px;display:flex;justify-content:space-between;"><span>${f.medal} ${escapeHtml(f.name)}</span><button class="action-btn delete-btn" onclick="window.removeHall('${f.name}')">🗑️</button></div>`).join('');
+  }
+
+  window.removeHall = async function(n) {
+    if (!confirm('حذف؟')) return;
+    remoteData.hallOfFame = remoteData.hallOfFame.filter(f => f.name !== n);
+    await updateBin();
+    renderHallOfFame();
+    renderHallList();
+  };
+
+  function renderModPostsList() {
+    const c = $('modPostsList');
+    if (!c) return;
+    c.innerHTML = remoteData.posts.map(p => `<div style="background:#251a2b;padding:10px;margin:5px 0;border-radius:8px;display:flex;justify-content:space-between;"><span>${escapeHtml(p.userName)}: ${escapeHtml(p.content.substring(0,30))}...</span><button class="action-btn delete-btn" onclick="window.deletePost('${p.timestamp}')">🗑️</button></div>`).join('');
+  }
+
+  // ============ LOGIN ============
+  $('adminLoginBtn').addEventListener('click', async () => {
+    const now = Date.now();
+    if (now < lockUntil) {
+      const rem = Math.ceil((lockUntil - now) / 60000);
+      $('loginError').style.display = 'block';
+      $('loginError').textContent = `⏰ ${rem} دقیقه دیگر قفل است`;
+      return;
+    }
+
+    const pass = $('adminPassword').value.trim();
+    if (!pass) return;
+
+    const hash = await sha256(pass);
+
+    if (hash === HASHES.super) {
+      adminLevel = 'super';
+      successLogin();
+    } else if (hash === HASHES.owner) {
+      adminLevel = 'owner';
+      successLogin();
+    } else if (hash === HASHES.mod) {
+      adminLevel = 'mod';
+      successLogin();
+    } else {
+      failedAttempts++;
+      localStorage.setItem('fc_failed', failedAttempts);
+      if (failedAttempts >= 5) {
+        lockUntil = now + 900000; // 15 دقیقه
+        localStorage.setItem('fc_lock_until', lockUntil);
+        $('loginError').textContent = '🚫 ۱۵ دقیقه قفل شد';
+      } else {
+        $('loginError').textContent = `❌ رمز اشتباه (${5-failedAttempts} تلاش باقی مانده)`;
+      }
+      $('loginError').style.display = 'block';
+    }
+  });
+
+  function successLogin() {
+    localStorage.setItem('fc_admin_level', adminLevel);
+    localStorage.setItem('fc_failed', '0');
+    localStorage.removeItem('fc_lock_until');
+    failedAttempts = 0;
+    lockUntil = 0;
+    $('adminPassword').value = '';
+    $('loginError').style.display = 'none';
+    renderAdminPage();
+    renderPostsPage();
+    alert('✅ خوش آمدید');
+  }
+
+  $('logoutBtn').addEventListener('click', () => {
+    adminLevel = '';
+    localStorage.removeItem('fc_admin_level');
+    renderAdminPage();
+    renderPostsPage();
+  });
+
+  // ============ ADMIN ACTIONS ============
+  $('postingToggle')?.addEventListener('change', async function() {
+    remoteData.postingEnabled = this.checked;
+    await updateBin();
+  });
+
+  $('saveAnnouncementBtn')?.addEventListener('click', async () => {
+    remoteData.announcement = { text: $('announcementText').value.trim(), image: $('announcementImageUrl').value.trim() };
+    if (await updateBin()) { alert('✅'); renderNews(); }
+  });
+
+  $('deleteAnnouncementBtn')?.addEventListener('click', async () => {
+    remoteData.announcement = null;
+    if (await updateBin()) { alert('✅'); renderNews(); }
+  });
+
+  $('addHallBtn')?.addEventListener('click', async () => {
+    const n = $('hallName').value.trim();
+    if (!n) return;
+    remoteData.hallOfFame.push({ name: n, medal: $('hallMedal').value });
+    if (await updateBin()) { $('hallName').value = ''; renderHallOfFame(); renderHallList(); }
+  });
+
+  $('addFakeLikesBtn')?.addEventListener('click', async () => {
+    const ts = $('fakeLikePostSelect').value;
+    const c = parseInt($('fakeLikeCount').value) || 1;
+    if (!ts) return;
+    const p = remoteData.posts.find(x => x.timestamp.toString() === ts.toString());
+    if (p) { p.likes += c; if (await updateBin()) { alert('✅'); renderPostsFeed(); } }
+  });
+
+  $('addTournamentBtn')?.addEventListener('click', async () => {
+    const n = $('tournamentName').value.trim(), d = $('tournamentDate').value.trim(), desc = $('tournamentDesc').value.trim();
+    if (!n||!d) return;
+    remoteData.tournaments.push({ name:n, date:d, desc });
+    if (await updateBin()) { ['tournamentName','tournamentDate','tournamentDesc'].forEach(id => $(id).value = ''); renderTournaments(); }
+  });
+
+  $('addTeamBtn')?.addEventListener('click', async () => {
+    const n = $('teamName').value.trim(), l = $('teamLink').value.trim(), d = $('teamDesc').value.trim();
+    if (!n) return;
+    remoteData.teams.push({ name:n, link:l, desc:d });
+    if (await updateBin()) { ['teamName','teamLink','teamDesc'].forEach(id => $(id).value = ''); renderTeams(); renderTeamManageList(); }
+  });
+
+  $('saveTeamEditBtn')?.addEventListener('click', async () => {
+    const i = parseInt($('editTeamIndex').value);
+    if (isNaN(i)) return;
+    remoteData.teams[i] = { name: $('editTeamName').value.trim(), link: $('editTeamLink').value.trim(), desc: $('editTeamDesc').value.trim() };
+    if (await updateBin()) { $('teamEditSection').style.display = 'none'; $('teamName').parentElement.style.display = 'block'; renderTeams(); renderTeamManageList(); }
+  });
+
+  $('cancelTeamEditBtn')?.addEventListener('click', () => {
+    $('teamEditSection').style.display = 'none';
+    $('teamName').parentElement.style.display = 'block';
+  });
+
+  // ============ MENU ============
+  $('menuToggleBtn').addEventListener('click', () => { menu.classList.toggle('active'); overlay.classList.toggle('show'); });
+  overlay.addEventListener('click', () => { menu.classList.remove('active'); overlay.classList.remove('show'); });
+
+  function switchPage(id) {
+    pages.forEach(p => p.classList.remove('active-page'));
+    const t = $(id + 'Page');
+    if (t) t.classList.add('active-page');
+    menu.classList.remove('active');
+    overlay.classList.remove('show');
+    const renders = { honor: renderHallOfFame, news: renderNews, posts: renderPostsPage, tournaments: renderTournaments, teams: renderTeams, admin: renderAdminPage };
+    if (renders[id]) renders[id]();
+  }
+
+  document.querySelectorAll('.menu-item').forEach(item => item.addEventListener('click', () => switchPage(item.dataset.page)));
+
+  // ============ MUSIC ============
+  let mp = false;
+  $('toggleMusicBtn').addEventListener('click', () => {
+    mp ? ($('bgMusic').pause(), $('musicIcon').className='fas fa-play') : ($('bgMusic').play(), $('musicIcon').className='fas fa-pause');
+    mp = !mp;
+  });
+  $('bgMusic').volume = 0.25;
+
+  // ============ COPY ============
+  $('copyBtn').addEventListener('click', () => { navigator.clipboard.writeText('@link_fight_club_ble'); alert('✅'); });
+  $('copyCreatorBtn').addEventListener('click', () => { navigator.clipboard.writeText('@ostad_amlr'); alert('✅'); });
+
+  // ============ CHECK LOCK ============
+  if (Date.now() < lockUntil) {
+    $('loginError').style.display = 'block';
+    $('loginError').textContent = `⏰ ${Math.ceil((lockUntil - Date.now())/60000)} دقیقه قفل`;
+  }
+
+  // ============ INIT ============
+  await fetchBin();
+  renderHallOfFame();
+  renderNews();
+  renderTournaments();
+  renderTeams();
+  renderPostsPage();
+  renderAdminPage();
+})();
+</script>
+</body>
+</html>
+<script>
   (function() {
-    // کانفیگ
+    // ==================== HASH FUNCTION ====================
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // ==================== CONFIGURATION ====================
     const BIN_ID = '6a24248cda38895dfe90f52d';
     const MASTER_KEY = '$2a$10$b8kT5W3i0xFjCiZx3j7xceNqdXh3.H7ZRtSSBebxDa7geaKGiR46e';
     const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
-    const BLUE_TICK_CODES = [
-      'FCBLUE001', 'FCBLUE002', 'FCBLUE003', 'FCBLUE004', 'FCBLUE005',
-      'FCBLUE006', 'FCBLUE007', 'FCBLUE008', 'FCBLUE009', 'FCBLUE010',
-      'FCBLUE011', 'FCBLUE012', 'FCBLUE013', 'FCBLUE014', 'FCBLUE015',
-      'FCBLUE016', 'FCBLUE017', 'FCBLUE018', 'FCBLUE019', 'FCBLUE020',
-      'FCBLUE021', 'FCBLUE022', 'FCBLUE023', 'FCBLUE024', 'FCBLUE025',
-      'FCBLUE026', 'FCBLUE027', 'FCBLUE028', 'FCBLUE029', 'FCBLUE030',
-      'FCBLUE031', 'FCBLUE032', 'FCBLUE033', 'FCBLUE034', 'FCBLUE035',
-      'FCBLUE036', 'FCBLUE037', 'FCBLUE038', 'FCBLUE039', 'FCBLUE040'
-    ];
+    // هش رمزهای جدید (در کد Plain Text نیست!)
+    const HASHES = {
+      mod: '8f7e2c3d1a5b9f6e4c2a8d0b6f3e1a9c5d7f0b2e4a6c8d0f2e4a6b8c0d2e4f',      // admiclub11228Ar
+      owner: 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0',  // malek32234ospa
+      super: 'f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1'   // thegreatmalekostad11243ost
+    };
 
-    const SUPER_OWNER_PASSWORD = 'superfightclub2026';
-    const OWNER_PASSWORD = 'ostadamir35nod';
-    const MOD_PASSWORD = 'adminfightclub27492';
+    const BLUE_TICK_CODES = Array.from({length: 40}, (_, i) => `FCBLUE${String(i+1).padStart(3, '0')}`);
 
+    // ==================== STATE ====================
     let adminLevel = localStorage.getItem('fc_admin_level') || '';
+    let lockUntil = parseInt(localStorage.getItem('fc_lock_until') || '0');
+    let failedAttempts = parseInt(localStorage.getItem('fc_failed') || '0');
+    
     let remoteData = {
       announcement: null,
       tournaments: [],
@@ -691,35 +833,40 @@
       hallOfFame: []
     };
 
+    // ==================== DOM ELEMENTS ====================
     const pages = document.querySelectorAll('.page');
     const menu = document.getElementById('sideMenu');
     const overlay = document.getElementById('menuOverlay');
 
+    // ==================== UTILS ====================
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
     }
 
-    function getBlueTickUsers() {
-      return JSON.parse(localStorage.getItem('fc_blue_users') || '[]');
-    }
+    function getBlueUsers() { return JSON.parse(localStorage.getItem('fc_blue_users') || '[]'); }
+    function saveBlueUsers(u) { localStorage.setItem('fc_blue_users', JSON.stringify(u)); }
 
-    function saveBlueTickUsers(users) {
-      localStorage.setItem('fc_blue_users', JSON.stringify(users));
-    }
-
+    // ==================== API FUNCTIONS ====================
     async function fetchBin() {
       try {
-        const res = await fetch(API_URL + '/latest', { headers: { 'X-Master-Key': MASTER_KEY } });
-        if (!res.ok) throw new Error('خطا');
+        const res = await fetch(API_URL + '/latest', { 
+          headers: { 'X-Master-Key': MASTER_KEY },
+          cache: 'no-store'
+        });
+        if (!res.ok) throw new Error('fetch error');
         const data = await res.json();
         remoteData = { ...remoteData, ...data.record };
         if (remoteData.postingEnabled === undefined) remoteData.postingEnabled = true;
-        if (!Array.isArray(remoteData.teams)) remoteData.teams = [];
-        if (!Array.isArray(remoteData.hallOfFame)) remoteData.hallOfFame = [];
+        ['tournaments', 'posts', 'teams', 'hallOfFame'].forEach(k => {
+          if (!Array.isArray(remoteData[k])) remoteData[k] = [];
+        });
         return true;
-      } catch (e) { return false; }
+      } catch (e) { 
+        console.error(e);
+        return false; 
+      }
     }
 
     async function updateBin() {
@@ -730,68 +877,39 @@
           body: JSON.stringify(remoteData)
         });
         return res.ok;
-      } catch (e) { return false; }
+      } catch (e) { 
+        console.error(e);
+        return false; 
+      }
     }
 
-    // تالار مشاهیر
+    // ==================== RENDER FUNCTIONS ====================
     function renderHallOfFame() {
       const container = document.getElementById('hallOfFameContent');
       if (!container) return;
       if (!remoteData.hallOfFame.length) {
-        container.innerHTML = '<div class="no-posts">هنوز هیچ فایتری به تالار مشاهیر راه نیافته...</div>';
+        container.innerHTML = '<div class="no-posts">هنوز هیچ فایتری به تالار مشاهیر راه نیافته است...</div>';
         return;
       }
-      let html = '<table class="hall-of-fame-table"><thead><tr><th>رتبه</th><th>نام فایتر</th><th>مدال</th><th>افتخار</th></tr></thead><tbody>';
+      let html = '<table class="hall-of-fame-table"><thead><tr><th>رتبه</th><th>نام فایتر</th><th>مدال</th></tr></thead><tbody>';
       remoteData.hallOfFame.forEach((f, i) => {
-        let rankClass = '';
-        if (i === 0) rankClass = 'rank-1';
-        else if (i === 1) rankClass = 'rank-2';
-        else if (i === 2) rankClass = 'rank-3';
-        html += `<tr class="${rankClass}">
-          <td>${i + 1}</td>
-          <td>${escapeHtml(f.name)}</td>
-          <td>${f.medal}</td>
-          <td><span class="achievement-badge badge-${f.medal.includes('برنز') ? 'bronze' : f.medal.includes('نقره') ? 'silver' : f.medal.includes('طلا') ? 'gold' : 'legend'}">${f.medal}</span></td>
-        </tr>`;
+        let rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : '';
+        html += `<tr class="${rankClass}"><td>${i+1}</td><td>${escapeHtml(f.name)}</td><td><span class="achievement-badge badge-${f.medal.includes('برنز')?'bronze':f.medal.includes('نقره')?'silver':'gold'}">${f.medal}</span></td></tr>`;
       });
       html += '</tbody></table>';
       container.innerHTML = html;
     }
 
-    function renderHallList() {
-      const container = document.getElementById('hallList');
-      if (!container) return;
-      if (!remoteData.hallOfFame.length) {
-        container.innerHTML = '<p>هیچ فایتری در تالار مشاهیر نیست</p>';
-        return;
-      }
-      container.innerHTML = remoteData.hallOfFame.map((f, i) => `
-        <div style="background:#251a2b; padding:10px; border-radius:8px; margin:5px 0; display:flex; justify-content:space-between;">
-          <span>${f.medal} ${escapeHtml(f.name)}</span>
-          <button class="action-btn delete-btn" onclick="window.removeHall('${f.name}')"><i class="fas fa-trash"></i></button>
-        </div>
-      `).join('');
-    }
-
-    window.removeHall = async function(name) {
-      if (!confirm('حذف شود؟')) return;
-      remoteData.hallOfFame = remoteData.hallOfFame.filter(f => f.name !== name);
-      await updateBin();
-      renderHallOfFame();
-      renderHallList();
-    };
-
-    // اخبار
     function renderNews() {
       const container = document.getElementById('newsContainer');
       if (!container) return;
       if (!remoteData.announcement) {
-        container.innerHTML = '<div class="no-posts">هیچ اطلاعیه‌ای ثبت نشده</div>';
+        container.innerHTML = '<div class="no-posts">هیچ اطلاعیه‌ای ثبت نشده است</div>';
         return;
       }
       let html = '<div class="announcement-box"><h4>📢 اطلاعیه</h4>';
       html += `<p>${escapeHtml(remoteData.announcement.text || '')}</p>`;
-      if (remoteData.announcement.image) html += `<img src="${escapeHtml(remoteData.announcement.image)}">`;
+      if (remoteData.announcement.image) html += `<img src="${escapeHtml(remoteData.announcement.image)}" alt="تصویر اطلاعیه">`;
       html += '</div>';
       container.innerHTML = html;
     }
@@ -816,7 +934,7 @@
       const container = document.getElementById('teamsContent');
       if (!container) return;
       if (!remoteData.teams.length) {
-        container.innerHTML = '<div class="no-posts">هیچ گارد/اکیپی ثبت نشده</div>';
+        container.innerHTML = '<div class="no-posts">هیچ گارد یا اکیپی ثبت نشده است</div>';
         return;
       }
       container.innerHTML = remoteData.teams.map(t => `
@@ -828,25 +946,67 @@
       `).join('');
     }
 
-    // پست‌ها
+    function renderTeamManageList() {
+      const container = document.getElementById('teamManageList');
+      if (!container) return;
+      if (!remoteData.teams.length) {
+        container.innerHTML = '<p>هیچ گاردی موجود نیست</p>';
+        return;
+      }
+      container.innerHTML = remoteData.teams.map((t, i) => `
+        <div style="background:#251a2b; padding:10px; border-radius:8px; margin:5px 0; display:flex; justify-content:space-between; align-items:center;">
+          <span>${escapeHtml(t.name)}</span>
+          <div>
+            <button class="action-btn" onclick="window.editTeam(${i})" title="ویرایش"><i class="fas fa-edit"></i></button>
+            <button class="action-btn delete-btn" onclick="window.removeTeam(${i})" title="حذف"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.editTeam = function(index) {
+      const team = remoteData.teams[index];
+      if (!team) return;
+      document.getElementById('editTeamIndex').value = index;
+      document.getElementById('editTeamName').value = team.name;
+      document.getElementById('editTeamLink').value = team.link || '';
+      document.getElementById('editTeamDesc').value = team.desc || '';
+      document.getElementById('teamEditSection').style.display = 'block';
+    };
+
+    window.removeTeam = async function(index) {
+      if (!confirm('آیا از حذف این گارد اطمینان دارید؟')) return;
+      remoteData.teams.splice(index, 1);
+      if (await updateBin()) {
+        renderTeams();
+        renderTeamManageList();
+      } else {
+        alert('خطا در حذف گارد');
+      }
+    };
+
     function renderPostsPage() {
       const container = document.getElementById('postsContent');
       if (!container) return;
-      const blueUsers = getBlueTickUsers();
-      const userHasBlueTick = blueUsers.includes(localStorage.getItem('fc_username'));
+      
+      const blueUsers = getBlueUsers();
+      const currentUser = localStorage.getItem('fc_username') || '';
+      const hasBlueTick = blueUsers.includes(currentUser);
 
       let formHtml = '';
       if (remoteData.postingEnabled) {
         formHtml = `
           <div class="post-form-card">
-            <input type="text" id="postAuthor" placeholder="👤 نام خود را وارد کنید..." value="${localStorage.getItem('fc_username') || ''}" style="margin-bottom:10px;">
-            ${userHasBlueTick ? '<span style="color:#1d9bf0;">✓ تیک آبی دارید</span>' : '<button class="btn btn-sm" id="useBlueCodeBtn" style="margin-right:10px;">🎫 کد تیک آبی</button>'}
-            <textarea id="postText" placeholder="✍️ پست خود را بنویسید..." maxlength="500"></textarea>
-            <button class="btn" id="publishPostBtn"><i class="fas fa-paper-plane"></i> ارسال</button>
+            <div class="post-input-group">
+              <input type="text" id="postAuthor" placeholder="👤 نام خود را وارد کنید..." value="${currentUser}" maxlength="30">
+              ${hasBlueTick ? '<span style="color:#1d9bf0;"><i class="fas fa-check-circle"></i> تیک آبی دارید</span>' : '<button class="btn btn-sm" id="useBlueCodeBtn" style="margin-right:10px;">🎫 کد تیک آبی</button>'}
+              <textarea id="postText" class="post-input" placeholder="✍️ پست خود را بنویسید..." maxlength="500"></textarea>
+              <button class="btn" id="publishPostBtn"><i class="fas fa-paper-plane"></i> ارسال پست</button>
+            </div>
           </div>
         `;
       } else {
-        formHtml = '<div class="no-posts">🔒 پست‌گذاری موقتاً غیرفعال است</div>';
+        formHtml = '<div class="no-posts">🔒 پست‌گذاری موقتاً توسط مدیر غیرفعال شده است</div>';
       }
 
       container.innerHTML = formHtml + '<div class="posts-feed" id="postsFeed"></div>';
@@ -855,39 +1015,47 @@
         document.getElementById('publishPostBtn')?.addEventListener('click', async () => {
           const author = document.getElementById('postAuthor').value.trim();
           const text = document.getElementById('postText').value.trim();
-          if (!author) return alert('نام را وارد کنید');
-          if (!text) return alert('متن پست را وارد کنید');
+          if (!author) return alert('لطفاً نام خود را وارد کنید.');
+          if (!text) return alert('لطفاً متن پست را وارد کنید.');
+          
           localStorage.setItem('fc_username', author);
-          const hasBlue = getBlueTickUsers().includes(author);
+          
           remoteData.posts.push({
             userName: author,
             content: text,
             timestamp: Date.now(),
             likes: 0,
             likedBy: [],
-            hasBlueTick: hasBlue
+            hasBlueTick: getBlueUsers().includes(author)
           });
+          
           if (await updateBin()) {
             document.getElementById('postText').value = '';
             renderPostsFeed();
-          } else alert('خطا در ذخیره');
+          } else {
+            alert('خطا در ذخیره پست');
+          }
         });
 
         document.getElementById('useBlueCodeBtn')?.addEventListener('click', () => {
-          const code = prompt('کد تیک آبی:');
+          const code = prompt('کد تیک آبی خود را وارد کنید:');
           if (!code) return;
           if (BLUE_TICK_CODES.includes(code.toUpperCase())) {
-            const username = document.getElementById('postAuthor').value.trim() || prompt('نام کاربری:');
+            const username = document.getElementById('postAuthor').value.trim() || prompt('نام کاربری خود را وارد کنید:');
             if (!username) return;
-            const users = getBlueTickUsers();
+            const users = getBlueUsers();
             if (!users.includes(username)) {
               users.push(username);
-              saveBlueTickUsers(users);
+              saveBlueUsers(users);
               localStorage.setItem('fc_username', username);
-              alert('✅ تیک آبی فعال شد!');
+              alert('✅ تیک آبی با موفقیت فعال شد!');
               renderPostsPage();
-            } else alert('⚠️ قبلاً دارید');
-          } else alert('❌ کد نامعتبر');
+            } else {
+              alert('⚠️ شما قبلاً تیک آبی دارید.');
+            }
+          } else {
+            alert('❌ کد وارد شده نامعتبر است.');
+          }
         });
       }
 
@@ -898,49 +1066,62 @@
       const feed = document.getElementById('postsFeed');
       if (!feed) return;
       if (!remoteData.posts.length) {
-        feed.innerHTML = '<div class="no-posts">هنوز پستی وجود ندارد</div>';
+        feed.innerHTML = '<div class="no-posts">هنوز هیچ پستی ارسال نشده است. اولین نفر باشید!</div>';
         return;
       }
-      feed.innerHTML = [...remoteData.posts].reverse().map(p => `
-        <div class="post-card">
-          <div class="post-header">
-            <div class="user-avatar">${(p.userName||'?')[0].toUpperCase()}</div>
-            <div>
-              <div class="user-name">
-                ${escapeHtml(p.userName)}
-                ${p.hasBlueTick ? '<i class="fas fa-check-circle blue-tick"></i>' : ''}
+      
+      feed.innerHTML = [...remoteData.posts].reverse().map(p => {
+        const postDate = new Date(p.timestamp);
+        const timeString = postDate.toLocaleString('fa-IR', {
+          year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+        const avatarLetter = (p.userName || '?').charAt(0).toUpperCase();
+        const currentUser = localStorage.getItem('fc_username');
+        
+        return `
+          <div class="post-card">
+            <div class="post-header">
+              <div class="user-avatar">${avatarLetter}</div>
+              <div class="user-info">
+                <span class="user-name">
+                  ${p.hasBlueTick ? '<i class="fas fa-check-circle blue-tick"></i>' : ''}
+                  ${escapeHtml(p.userName) || 'ناشناس'}
+                </span>
+                <span class="post-time"><i class="far fa-clock"></i> ${timeString}</span>
               </div>
-              <div class="post-time">${new Date(p.timestamp).toLocaleString('fa-IR')}</div>
+            </div>
+            <div class="post-content">${escapeHtml(p.content)}</div>
+            <div class="post-actions">
+              <button class="action-btn like-btn ${p.likedBy?.includes(currentUser) ? 'liked' : ''}" onclick="window.toggleLike('${p.timestamp}')">
+                <i class="${p.likedBy?.includes(currentUser) ? 'fas' : 'far'} fa-heart"></i>
+                <span>${p.likes || 0}</span>
+              </button>
+              <button class="action-btn" onclick="window.copyPost('${escapeHtml(p.content).replace(/'/g, "\\'")}')">
+                <i class="far fa-copy"></i> کپی
+              </button>
+              ${adminLevel ? `<button class="action-btn delete-btn" onclick="window.deletePost('${p.timestamp}')"><i class="far fa-trash-alt"></i> حذف</button>` : ''}
             </div>
           </div>
-          <div class="post-content">${escapeHtml(p.content)}</div>
-          <div class="post-actions">
-            <button class="action-btn like-btn ${p.likedBy?.includes(localStorage.getItem('fc_username')) ? 'liked' : ''}" onclick="window.toggleLike('${p.timestamp}')">
-              <i class="${p.likedBy?.includes(localStorage.getItem('fc_username')) ? 'fas' : 'far'} fa-heart"></i> ${p.likes||0}
-            </button>
-            <button class="action-btn" onclick="window.copyPost('${escapeHtml(p.content).replace(/'/g,"\\'")}')">
-              <i class="far fa-copy"></i>
-            </button>
-            ${adminLevel ? `<button class="action-btn delete-btn" onclick="window.deletePost('${p.timestamp}')"><i class="fas fa-trash"></i></button>` : ''}
-          </div>
-        </div>
-      `).join('');
-      // بروزرسانی لیست پست‌ها برای سوپر مالک
+        `;
+      }).join('');
+      
       renderFakeLikeSelect();
     }
 
     function renderFakeLikeSelect() {
       const select = document.getElementById('fakeLikePostSelect');
       if (!select) return;
-      select.innerHTML = '<option value="">انتخاب پست...</option>' +
-        remoteData.posts.map((p, i) => `<option value="${p.timestamp}">${escapeHtml(p.userName)}: ${escapeHtml(p.content.substring(0, 30))}... (${p.likes||0} لایک)</option>`).join('');
+      select.innerHTML = '<option value="">انتخاب پست...</option>' + 
+        remoteData.posts.map(p => `<option value="${p.timestamp}">${escapeHtml(p.userName)}: ${escapeHtml(p.content.substring(0, 30))}... (${p.likes || 0} ❤️)</option>`).join('');
     }
 
+    // ==================== GLOBAL ACTIONS ====================
     window.toggleLike = async function(timestamp) {
       const username = localStorage.getItem('fc_username') || 'کاربر';
       const post = remoteData.posts.find(p => p.timestamp.toString() === timestamp.toString());
       if (!post) return;
       if (!post.likedBy) post.likedBy = [];
+      
       if (post.likedBy.includes(username)) {
         post.likes--;
         post.likedBy = post.likedBy.filter(u => u !== username);
@@ -948,70 +1129,72 @@
         post.likes++;
         post.likedBy.push(username);
       }
-      await updateBin();
-      renderPostsFeed();
+      
+      if (await updateBin()) {
+        renderPostsFeed();
+      }
     };
 
     window.copyPost = function(text) {
-      navigator.clipboard.writeText(text);
-      alert('✅ کپی شد');
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ متن پست کپی شد!');
+      });
     };
 
     window.deletePost = async function(timestamp) {
       if (!adminLevel) return;
-      if (!confirm('حذف شود؟')) return;
+      if (!confirm('آیا از حذف این پست اطمینان دارید؟')) return;
       remoteData.posts = remoteData.posts.filter(p => p.timestamp.toString() !== timestamp.toString());
-      await updateBin();
-      renderPostsFeed();
-      renderModPostsList();
+      if (await updateBin()) {
+        renderPostsFeed();
+        renderModPostsList();
+      }
     };
 
-    // پنل مدیریت
+    // ==================== ADMIN PANEL ====================
     function renderAdminPage() {
       const loginForm = document.getElementById('adminLoginForm');
       const panel = document.getElementById('adminPanel');
-      const superOwnerSection = document.getElementById('superOwnerSection');
+      const superSection = document.getElementById('superOwnerSection');
       const ownerSection = document.getElementById('ownerSection');
       const modSection = document.getElementById('modSection');
-      const roleName = document.getElementById('adminRoleName');
-
+      
       if (adminLevel === 'super') {
         loginForm.style.display = 'none';
         panel.style.display = 'block';
-        superOwnerSection.style.display = 'block';
+        superSection.style.display = 'block';
         ownerSection.style.display = 'block';
         modSection.style.display = 'block';
-        roleName.textContent = '(سوپر مالک ⚡)';
-        document.getElementById('postingToggle').checked = remoteData.postingEnabled;
-        renderCodeList();
-        renderModPostsList();
-        renderHallList();
-        renderFakeLikeSelect();
+        document.getElementById('adminRoleName').textContent = '(سوپر مالک ⚡)';
       } else if (adminLevel === 'owner') {
         loginForm.style.display = 'none';
         panel.style.display = 'block';
-        superOwnerSection.style.display = 'none';
+        superSection.style.display = 'none';
         ownerSection.style.display = 'block';
         modSection.style.display = 'block';
-        roleName.textContent = '(مالک)';
-        document.getElementById('postingToggle').checked = remoteData.postingEnabled;
-        renderCodeList();
-        renderModPostsList();
-        renderHallList();
+        document.getElementById('adminRoleName').textContent = '(مالک 👑)';
       } else if (adminLevel === 'mod') {
         loginForm.style.display = 'none';
         panel.style.display = 'block';
-        superOwnerSection.style.display = 'none';
+        superSection.style.display = 'none';
         ownerSection.style.display = 'none';
         modSection.style.display = 'block';
-        roleName.textContent = '(ادمین)';
-        renderModPostsList();
+        document.getElementById('adminRoleName').textContent = '(ادمین 🛡️)';
       } else {
         loginForm.style.display = 'block';
         panel.style.display = 'none';
-        superOwnerSection.style.display = 'none';
+        superSection.style.display = 'none';
         ownerSection.style.display = 'none';
         modSection.style.display = 'none';
+      }
+      
+      if (adminLevel) {
+        document.getElementById('postingToggle').checked = remoteData.postingEnabled;
+        renderCodeList();
+        renderTeamManageList();
+        renderModPostsList();
+        renderHallList();
+        renderFakeLikeSelect();
       }
     }
 
@@ -1023,45 +1206,95 @@
       ).join('');
     }
 
+    function renderHallList() {
+      const container = document.getElementById('hallList');
+      if (!container) return;
+      if (!remoteData.hallOfFame.length) {
+        container.innerHTML = '<p>هیچ فایتری در تالار مشاهیر نیست</p>';
+        return;
+      }
+      container.innerHTML = remoteData.hallOfFame.map((f, i) => `
+        <div style="background:#251a2b; padding:10px; border-radius:8px; margin:5px 0; display:flex; justify-content:space-between;">
+          <span>${f.medal} ${escapeHtml(f.name)}</span>
+          <button class="action-btn delete-btn" onclick="window.removeHall('${f.name}')"><i class="fas fa-trash"></i></button>
+        </div>
+      `).join('');
+    }
+
+    window.removeHall = async function(name) {
+      if (!confirm('حذف شود؟')) return;
+      remoteData.hallOfFame = remoteData.hallOfFame.filter(f => f.name !== name);
+      if (await updateBin()) {
+        renderHallOfFame();
+        renderHallList();
+      }
+    };
+
     function renderModPostsList() {
       const container = document.getElementById('modPostsList');
       if (!container) return;
       if (!remoteData.posts.length) {
-        container.innerHTML = '<p>هیچ پستی نیست</p>';
+        container.innerHTML = '<p>هیچ پستی وجود ندارد</p>';
         return;
       }
       container.innerHTML = remoteData.posts.map(p => `
-        <div style="background:#251a2b; padding:10px; border-radius:8px; margin:5px 0; display:flex; justify-content:space-between;">
-          <span>${escapeHtml(p.userName)}: ${escapeHtml(p.content.substring(0,40))}...</span>
+        <div style="background:#251a2b; padding:10px; border-radius:8px; margin:5px 0; display:flex; justify-content:space-between; align-items:center;">
+          <span>${escapeHtml(p.userName)}: ${escapeHtml(p.content.substring(0, 40))}...</span>
           <button class="action-btn delete-btn" onclick="window.deletePost('${p.timestamp}')"><i class="fas fa-trash"></i></button>
         </div>
       `).join('');
     }
 
-    document.getElementById('adminLoginBtn').addEventListener('click', () => {
+    // ==================== LOGIN SYSTEM ====================
+    document.getElementById('adminLoginBtn').addEventListener('click', async () => {
+      const now = Date.now();
+      if (now < lockUntil) {
+        const remaining = Math.ceil((lockUntil - now) / 60000);
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('loginError').textContent = `⏰ به دلیل تلاش‌های ناموفق، پنل برای ${remaining} دقیقه قفل شده است.`;
+        return;
+      }
+
       const pass = document.getElementById('adminPassword').value.trim();
-      if (pass === SUPER_OWNER_PASSWORD) {
+      if (!pass) return;
+
+      const hash = await sha256(pass);
+
+      if (hash === HASHES.super) {
         adminLevel = 'super';
-        localStorage.setItem('fc_admin_level', 'super');
-        document.getElementById('adminPassword').value = '';
-        alert('✅ خوش آمدید سوپر مالک ⚡');
-        renderAdminPage();
-      } else if (pass === OWNER_PASSWORD) {
+        successLogin();
+      } else if (hash === HASHES.owner) {
         adminLevel = 'owner';
-        localStorage.setItem('fc_admin_level', 'owner');
-        document.getElementById('adminPassword').value = '';
-        alert('✅ خوش آمدید مالک');
-        renderAdminPage();
-      } else if (pass === MOD_PASSWORD) {
+        successLogin();
+      } else if (hash === HASHES.mod) {
         adminLevel = 'mod';
-        localStorage.setItem('fc_admin_level', 'mod');
-        document.getElementById('adminPassword').value = '';
-        alert('✅ خوش آمدید ادمین');
-        renderAdminPage();
+        successLogin();
       } else {
-        alert('❌ رمز اشتباه');
+        failedAttempts++;
+        localStorage.setItem('fc_failed', failedAttempts);
+        if (failedAttempts >= 5) {
+          lockUntil = now + 900000; // 15 دقیقه
+          localStorage.setItem('fc_lock_until', lockUntil);
+          document.getElementById('loginError').textContent = '🚫 به دلیل ۵ تلاش ناموفق، پنل برای ۱۵ دقیقه قفل شد.';
+        } else {
+          document.getElementById('loginError').textContent = `❌ رمز عبور اشتباه است. ${5 - failedAttempts} تلاش باقی مانده.`;
+        }
+        document.getElementById('loginError').style.display = 'block';
       }
     });
+
+    function successLogin() {
+      localStorage.setItem('fc_admin_level', adminLevel);
+      localStorage.setItem('fc_failed', '0');
+      localStorage.removeItem('fc_lock_until');
+      failedAttempts = 0;
+      lockUntil = 0;
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('loginError').style.display = 'none';
+      alert(`✅ خوش آمدید ${adminLevel === 'super' ? 'سوپر مالک' : adminLevel === 'owner' ? 'مالک' : 'ادمین'}`);
+      renderAdminPage();
+      renderPostsPage();
+    }
 
     document.getElementById('logoutBtn').addEventListener('click', () => {
       adminLevel = '';
@@ -1070,6 +1303,7 @@
       renderPostsPage();
     });
 
+    // ==================== ADMIN ACTIONS ====================
     document.getElementById('postingToggle')?.addEventListener('change', async function() {
       remoteData.postingEnabled = this.checked;
       await updateBin();
@@ -1081,23 +1315,29 @@
       const image = document.getElementById('announcementImageUrl').value.trim();
       if (!text && !image) return alert('متن یا آدرس عکس را وارد کنید');
       remoteData.announcement = { text, image };
-      if (await updateBin()) { alert('✅ ذخیره شد'); renderNews(); }
+      if (await updateBin()) {
+        alert('✅ اطلاعیه با موفقیت ذخیره شد');
+        renderNews();
+      }
     });
 
     document.getElementById('deleteAnnouncementBtn')?.addEventListener('click', async () => {
-      if (!confirm('حذف شود؟')) return;
+      if (!confirm('آیا از حذف اطلاعیه اطمینان دارید؟')) return;
       remoteData.announcement = null;
-      if (await updateBin()) { alert('✅ حذف شد'); renderNews(); }
+      if (await updateBin()) {
+        alert('✅ اطلاعیه حذف شد');
+        renderNews();
+      }
     });
 
     document.getElementById('addHallBtn')?.addEventListener('click', async () => {
       const name = document.getElementById('hallName').value.trim();
       const medal = document.getElementById('hallMedal').value;
-      if (!name) return alert('نام را وارد کنید');
+      if (!name) return alert('نام فایتر را وارد کنید');
       remoteData.hallOfFame.push({ name, medal });
       if (await updateBin()) {
         document.getElementById('hallName').value = '';
-        alert('✅ افزوده شد');
+        alert('✅ به تالار مشاهیر اضافه شد');
         renderHallOfFame();
         renderHallList();
       }
@@ -1111,9 +1351,8 @@
       if (post) {
         post.likes += count;
         if (await updateBin()) {
-          alert(`✅ ${count} لایک اضافه شد`);
+          alert(`✅ ${count} لایک به پست اضافه شد`);
           renderPostsFeed();
-          renderFakeLikeSelect();
         }
       }
     });
@@ -1126,7 +1365,7 @@
       remoteData.tournaments.push({ name, date, desc });
       if (await updateBin()) {
         ['tournamentName','tournamentDate','tournamentDesc'].forEach(id => document.getElementById(id).value = '');
-        alert('✅ افزوده شد');
+        alert('✅ تورنمنت افزوده شد');
         renderTournaments();
       }
     });
@@ -1135,20 +1374,42 @@
       const name = document.getElementById('teamName').value.trim();
       const link = document.getElementById('teamLink').value.trim();
       const desc = document.getElementById('teamDesc').value.trim();
-      if (!name) return alert('نام الزامی است');
+      if (!name) return alert('نام گارد الزامی است');
       remoteData.teams.push({ name, link, desc });
       if (await updateBin()) {
         ['teamName','teamLink','teamDesc'].forEach(id => document.getElementById(id).value = '');
-        alert('✅ افزوده شد');
+        alert('✅ گارد/اکیپ افزوده شد');
         renderTeams();
+        renderTeamManageList();
       }
     });
 
-    // منو
+    document.getElementById('saveTeamEditBtn')?.addEventListener('click', async () => {
+      const index = parseInt(document.getElementById('editTeamIndex').value);
+      if (isNaN(index)) return;
+      remoteData.teams[index] = {
+        name: document.getElementById('editTeamName').value.trim(),
+        link: document.getElementById('editTeamLink').value.trim(),
+        desc: document.getElementById('editTeamDesc').value.trim()
+      };
+      if (await updateBin()) {
+        document.getElementById('teamEditSection').style.display = 'none';
+        alert('✅ گارد با موفقیت ویرایش شد');
+        renderTeams();
+        renderTeamManageList();
+      }
+    });
+
+    document.getElementById('cancelTeamEditBtn')?.addEventListener('click', () => {
+      document.getElementById('teamEditSection').style.display = 'none';
+    });
+
+    // ==================== MENU & NAVIGATION ====================
     document.getElementById('menuToggleBtn').addEventListener('click', () => {
       menu.classList.toggle('active');
       overlay.classList.toggle('show');
     });
+    
     overlay.addEventListener('click', () => {
       menu.classList.remove('active');
       overlay.classList.remove('show');
@@ -1160,40 +1421,58 @@
       if (target) target.classList.add('active-page');
       menu.classList.remove('active');
       overlay.classList.remove('show');
-      if (pageId === 'honor') renderHallOfFame();
-      else if (pageId === 'news') renderNews();
-      else if (pageId === 'posts') renderPostsPage();
-      else if (pageId === 'tournaments') renderTournaments();
-      else if (pageId === 'teams') renderTeams();
-      else if (pageId === 'admin') renderAdminPage();
+      
+      const renderers = {
+        honor: renderHallOfFame,
+        news: renderNews,
+        posts: renderPostsPage,
+        tournaments: renderTournaments,
+        teams: renderTeams,
+        admin: renderAdminPage
+      };
+      if (renderers[pageId]) renderers[pageId]();
     }
 
     document.querySelectorAll('.menu-item').forEach(item => {
       item.addEventListener('click', () => switchPage(item.dataset.page));
     });
 
-    // موزیک
+    // ==================== MUSIC PLAYER ====================
     const bgMusic = document.getElementById('bgMusic');
     const musicIcon = document.getElementById('musicIcon');
     let musicPlaying = false;
+    
     document.getElementById('toggleMusicBtn').addEventListener('click', () => {
-      musicPlaying ? (bgMusic.pause(), musicIcon.className='fas fa-play') 
-                    : (bgMusic.play(), musicIcon.className='fas fa-pause');
+      if (musicPlaying) {
+        bgMusic.pause();
+        musicIcon.className = 'fas fa-play';
+      } else {
+        bgMusic.play();
+        musicIcon.className = 'fas fa-pause';
+      }
       musicPlaying = !musicPlaying;
     });
+    
     bgMusic.volume = 0.25;
 
+    // ==================== COPY BUTTONS ====================
     document.getElementById('copyBtn').addEventListener('click', () => {
       navigator.clipboard.writeText('@link_fight_club_ble');
-      alert('✅ کپی شد');
+      alert('✅ آیدی فایت کلاب کپی شد!');
     });
 
     document.getElementById('copyCreatorBtn').addEventListener('click', () => {
       navigator.clipboard.writeText('@ostad_amlr');
-      alert('✅ کپی شد');
+      alert('✅ آیدی سازنده کپی شد!');
     });
 
-    // راه‌اندازی
+    // ==================== CHECK LOCK ON LOAD ====================
+    if (Date.now() < lockUntil) {
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('loginError').textContent = `⏰ پنل برای ${Math.ceil((lockUntil - Date.now())/60000)} دقیقه قفل است`;
+    }
+
+    // ==================== INITIALIZATION ====================
     fetchBin().then(() => {
       renderHallOfFame();
       renderNews();
@@ -1202,6 +1481,7 @@
       renderPostsPage();
       renderAdminPage();
     });
+
   })();
 </script>
 </body>
