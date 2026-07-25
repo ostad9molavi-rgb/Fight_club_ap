@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -1026,4 +1027,463 @@
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="side-menu" id="sideMenu">
         <div class="menu-item" data-page="home"><i class="fas fa-home"></i> خانه</div>
-        <div class="menu-item
+        <div class="menu-item" data-page="links"><i class="fas fa-link"></i> لینک ها</div>
+        <div class="menu-item" data-page="admins"><i class="fas fa-user-shield"></i> ادمین ها</div>
+        <div class="menu-item" data-page="posts"><i class="fas fa-comments"></i> پست های کاربران</div>
+        <div class="menu-item" data-page="honor"><i class="fas fa-crown"></i> تالار مشاهیر</div>
+        <div class="menu-item" data-page="teams"><i class="fas fa-users"></i> گاردها و اکیپ ها</div>
+        <div class="menu-item" data-page="tournaments"><i class="fas fa-trophy"></i> تورنمنت ها</div>
+        <div class="menu-item" data-page="news"><i class="fas fa-bullhorn"></i> اخبار و اطلاعیه ها</div>
+        <div class="menu-item" data-page="about"><i class="fas fa-info-circle"></i> درباره ما</div>
+    </div>
+
+    <div class="music-player" id="musicPlayer">
+        <button class="music-btn" id="toggleMusicBtn" title="پخش/توقف موزیک"><i class="fas fa-play" id="musicIcon"></i></button>
+        <span class="music-label">موزیک پس زمینه</span>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            مرورگر شما از پخش صدا پشتیبانی نمی کند.
+        </audio>
+    </div>
+
+    <button class="scroll-top-btn" id="scrollTopBtn" title="بازگشت به بالا"><i class="fas fa-chevron-up"></i></button>
+
+    <script>
+        (function() {
+
+            const BIN_ID = '6a24248cda38895dfe90f52d';
+            const MASTER_KEY = '$2a$10$b8kT5W3i0xFjCiZx3j7xceNqdXh3.H7ZRtSSBebxDa7geaKGiR46e';
+            const API_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+
+            const BLUE_TICK_CODES = [];
+            for (let i = 1; i <= 40; i++) {
+                BLUE_TICK_CODES.push('FCBLUE' + String(i).padStart(3, '0'));
+            }
+
+            let remoteData = {
+                announcement: null,
+                tournaments: [],
+                posts: [],
+                teams: [],
+                postingEnabled: true,
+                hallOfFame: []
+            };
+
+            function getElement(id) {
+                return document.getElementById(id);
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function getBlueUsers() {
+                const data = localStorage.getItem('fc_blue_users');
+                return data ? JSON.parse(data) : [];
+            }
+
+            function saveBlueUsers(users) {
+                localStorage.setItem('fc_blue_users', JSON.stringify(users));
+            }
+
+            async function fetchBin() {
+                try {
+                    const response = await fetch(API_URL + '/latest', {
+                        headers: { 'X-Master-Key': MASTER_KEY },
+                        cache: 'no-store'
+                    });
+                    if (!response.ok) throw new Error('خطا در دریافت داده');
+                    const data = await response.json();
+                    remoteData = Object.assign(remoteData, data.record);
+                    const arrays = ['tournaments', 'posts', 'teams', 'hallOfFame'];
+                    arrays.forEach(function(key) {
+                        if (!Array.isArray(remoteData[key])) remoteData[key] = [];
+                    });
+                    if (remoteData.postingEnabled === undefined) remoteData.postingEnabled = true;
+                    return true;
+                } catch (error) {
+                    console.error('fetchBin error:', error);
+                    return false;
+                }
+            }
+
+            async function updateBin() {
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': MASTER_KEY
+                        },
+                        body: JSON.stringify(remoteData)
+                    });
+                    return response.ok;
+                } catch (error) {
+                    console.error('updateBin error:', error);
+                    return false;
+                }
+            }
+
+            function renderHallOfFame() {
+                const container = getElement('hallOfFameContent');
+                if (!container) return;
+                if (!remoteData.hallOfFame.length) {
+                    container.innerHTML = '<div class="no-posts">هنوز هیچ فایتری به تالار مشاهیر راه نیافته است...</div>';
+                    return;
+                }
+                let html = '<table class="hall-of-fame-table"><thead><tr><th>رتبه</th><th>نام فایتر</th><th>مدال</th></tr></thead><tbody>';
+                remoteData.hallOfFame.forEach(function(f, i) {
+                    let rankClass = '';
+                    if (i === 0) rankClass = 'rank-1';
+                    else if (i === 1) rankClass = 'rank-2';
+                    else if (i === 2) rankClass = 'rank-3';
+                    let badgeClass = 'badge-gold';
+                    if (f.medal.indexOf('برنز') !== -1) badgeClass = 'badge-bronze';
+                    else if (f.medal.indexOf('نقره') !== -1) badgeClass = 'badge-silver';
+                    html += '<tr class="' + rankClass + '"><td>' + (i + 1) + '</td><td>' + escapeHtml(f.name) +
+                        '</td><td><span class="achievement-badge ' + badgeClass + '">' + f.medal +
+                        '</span></td></tr>';
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            }
+
+            function renderNews() {
+                const container = getElement('newsContainer');
+                if (!container) return;
+                if (!remoteData.announcement) {
+                    container.innerHTML = '<div class="no-posts">هیچ اطلاعیه ای ثبت نشده است</div>';
+                    return;
+                }
+                let html = '<div class="announcement-box"><h4>اطلاعیه</h4>';
+                html += '<p>' + escapeHtml(remoteData.announcement.text || '') + '</p>';
+                if (remoteData.announcement.image) {
+                    html += '<img src="' + escapeHtml(remoteData.announcement.image) + '" alt="تصویر اطلاعیه">';
+                }
+                html += '</div>';
+                container.innerHTML = html;
+            }
+
+            function renderTournaments() {
+                const container = getElement('tournamentsContent');
+                if (!container) return;
+                if (!remoteData.tournaments.length) {
+                    container.innerHTML = '<div class="no-posts">هیچ تورنمنتی ثبت نشده</div>';
+                    return;
+                }
+                let html = '';
+                remoteData.tournaments.forEach(function(t) {
+                    html += '<div class="tournament-item">';
+                    html += '<h4>' + escapeHtml(t.name) + '</h4>';
+                    html += '<p> ' + escapeHtml(t.date) + '</p>';
+                    html += '<p>' + escapeHtml(t.desc) + '</p>';
+                    html += '</div>';
+                });
+                container.innerHTML = html;
+            }
+
+            function renderTeams() {
+                const container = getElement('teamsContent');
+                if (!container) return;
+                if (!remoteData.teams.length) {
+                    container.innerHTML = '<div class="no-posts">هیچ گارد یا اکیپی ثبت نشده است</div>';
+                    return;
+                }
+                let html = '';
+                remoteData.teams.forEach(function(t) {
+                    html += '<div class="team-card">';
+                    html += '<h4>' + escapeHtml(t.name) + '</h4>';
+                    html += '<p>' + escapeHtml(t.desc) + '</p>';
+                    if (t.link) {
+                        html += '<a href="' + escapeHtml(t.link) + '" target="_blank"> ' + escapeHtml(t.link) +
+                            '</a>';
+                    }
+                    html += '</div>';
+                });
+                container.innerHTML = html;
+            }
+
+            function renderPostsPage() {
+                const container = getElement('postsContent');
+                if (!container) return;
+                const blueUsers = getBlueUsers();
+                const currentUser = localStorage.getItem('fc_username') || '';
+                const hasBlueTick = blueUsers.indexOf(currentUser) !== -1;
+
+                let formHtml = '';
+                if (remoteData.postingEnabled) {
+                    formHtml = '<div class="post-form-card">';
+                    formHtml +=
+                        '<input type="text" id="postAuthor" placeholder=" نام خود را وارد کنید..." value="' +
+                        escapeHtml(currentUser) + '" maxlength="30">';
+                    if (hasBlueTick) {
+                        formHtml +=
+                            '<span style="color:#1d9bf0; display:inline-block; margin:10px 0;"><i class="fas fa-check-circle"></i> تیک آبی دارید</span>';
+                    } else {
+                        formHtml +=
+                            '<button class="btn btn-sm" id="useBlueCodeBtn" style="margin:10px 5px;"> کد تیک آبی</button>';
+                    }
+                    formHtml +=
+                        '<textarea id="postText" class="post-input" placeholder=" پست خود را بنویسید..." maxlength="500"></textarea>';
+                    formHtml +=
+                        '<button class="btn" id="publishPostBtn" style="margin-top:10px;"><i class="fas fa-paper-plane"></i> ارسال پست</button>';
+                    formHtml += '</div>';
+                } else {
+                    formHtml = '<div class="no-posts"> پست گذاری موقتا توسط مدیر غیرفعال شده است</div>';
+                }
+
+                container.innerHTML = formHtml + '<div class="posts-feed" id="postsFeed"></div>';
+
+                if (remoteData.postingEnabled) {
+                    const publishBtn = getElement('publishPostBtn');
+                    if (publishBtn) {
+                        publishBtn.addEventListener('click', async function() {
+                            const author = getElement('postAuthor').value.trim();
+                            const text = getElement('postText').value.trim();
+                            if (!author) return alert('لطفا نام خود را وارد کنید.');
+                            if (!text) return alert('لطفا متن پست را وارد کنید.');
+
+                            localStorage.setItem('fc_username', author);
+
+                            remoteData.posts.push({
+                                userName: author,
+                                content: text,
+                                timestamp: Date.now(),
+                                likes: 0,
+                                likedBy: [],
+                                hasBlueTick: getBlueUsers().indexOf(author) !== -1
+                            });
+
+                            if (await updateBin()) {
+                                getElement('postText').value = '';
+                                renderPostsFeed();
+                            } else {
+                                alert('خطا در ذخیره پست. لطفا دوباره تلاش کنید.');
+                            }
+                        });
+                    }
+
+                    const blueBtn = getElement('useBlueCodeBtn');
+                    if (blueBtn) {
+                        blueBtn.addEventListener('click', function() {
+                            const code = prompt('کد تیک آبی خود را وارد کنید:');
+                            if (!code) return;
+                            if (BLUE_TICK_CODES.indexOf(code.toUpperCase()) !== -1) {
+                                const username = getElement('postAuthor').value.trim() || prompt(
+                                    'نام کاربری خود را وارد کنید:');
+                                if (!username) return;
+                                const users = getBlueUsers();
+                                if (users.indexOf(username) === -1) {
+                                    users.push(username);
+                                    saveBlueUsers(users);
+                                    localStorage.setItem('fc_username', username);
+                                    alert(' تیک آبی با موفقیت فعال شد!');
+                                    renderPostsPage();
+                                } else {
+                                    alert(' شما قبلا تیک آبی دارید.');
+                                }
+                            } else {
+                                alert(' کد وارد شده نامعتبر است.');
+                            }
+                        });
+                    }
+                }
+
+                renderPostsFeed();
+            }
+
+            function renderPostsFeed() {
+                const feed = getElement('postsFeed');
+                if (!feed) return;
+                if (!remoteData.posts.length) {
+                    feed.innerHTML =
+                        '<div class="no-posts">هنوز هیچ پستی ارسال نشده است. اولین نفر باشید!</div>';
+                    return;
+                }
+
+                const sortedPosts = remoteData.posts.slice().reverse();
+                let html = '';
+                sortedPosts.forEach(function(p) {
+                    const postDate = new Date(p.timestamp);
+                    const timeString = postDate.toLocaleString('fa-IR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    const avatarLetter = (p.userName || '?').charAt(0).toUpperCase();
+                    const currentUser = localStorage.getItem('fc_username');
+                    const isLiked = p.likedBy && p.likedBy.indexOf(currentUser) !== -1;
+
+                    html += '<div class="post-card">';
+                    html += '<div class="post-header">';
+                    html += '<div class="user-avatar">' + avatarLetter + '</div>';
+                    html += '<div class="user-info">';
+                    html += '<span class="user-name">';
+                    if (p.hasBlueTick) html += '<i class="fas fa-check-circle blue-tick"></i>';
+                    html += escapeHtml(p.userName) || 'ناشناس';
+                    html += '</span>';
+                    html += '<span class="post-time"><i class="far fa-clock"></i> ' + timeString + '</span>';
+                    html += '</div></div>';
+                    html += '<div class="post-content">' + escapeHtml(p.content) + '</div>';
+                    html += '<div class="post-actions">';
+                    html += '<button class="action-btn like-btn ' + (isLiked ? 'liked' : '') +
+                        '" onclick="window.toggleLike(\'' + p.timestamp + '\')">';
+                    html += '<i class="' + (isLiked ? 'fas' : 'far') + ' fa-heart"></i>';
+                    html += '<span>' + (p.likes || 0) + '</span>';
+                    html += '</button>';
+                    html +=
+                        '<button class="action-btn" onclick="window.copyPostContent(\'' +
+                        escapeHtml(p.content).replace(/'/g, "\\'") + '\')">';
+                    html += '<i class="far fa-copy"></i> کپی';
+                    html += '</button>';
+                    html += '</div></div>';
+                });
+                feed.innerHTML = html;
+            }
+
+            window.toggleLike = async function(timestamp) {
+                const username = localStorage.getItem('fc_username') || 'کاربر';
+                const post = remoteData.posts.find(function(p) {
+                    return p.timestamp.toString() === timestamp.toString();
+                });
+                if (!post) return;
+                if (!post.likedBy) post.likedBy = [];
+
+                const index = post.likedBy.indexOf(username);
+                if (index !== -1) {
+                    post.likes--;
+                    post.likedBy.splice(index, 1);
+                } else {
+                    post.likes++;
+                    post.likedBy.push(username);
+                }
+
+                if (await updateBin()) {
+                    renderPostsFeed();
+                }
+            };
+
+            window.copyPostContent = function(text) {
+                navigator.clipboard.writeText(text).then(function() {
+                    alert(' متن پست کپی شد!');
+                });
+            };
+
+            const menuToggle = getElement('menuToggleBtn');
+            const sideMenu = getElement('sideMenu');
+            const menuOverlay = getElement('menuOverlay');
+
+            menuToggle.addEventListener('click', function() {
+                sideMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('show');
+            });
+
+            menuOverlay.addEventListener('click', function() {
+                sideMenu.classList.remove('active');
+                menuOverlay.classList.remove('show');
+            });
+
+            function switchPage(pageId) {
+                const allPages = document.querySelectorAll('.page');
+                allPages.forEach(function(p) {
+                    p.classList.remove('active-page');
+                });
+                const target = getElement(pageId + 'Page');
+                if (target) target.classList.add('active-page');
+                sideMenu.classList.remove('active');
+                menuOverlay.classList.remove('show');
+
+                const renderers = {
+                    honor: renderHallOfFame,
+                    news: renderNews,
+                    posts: renderPostsPage,
+                    tournaments: renderTournaments,
+                    teams: renderTeams
+                };
+                if (renderers[pageId]) renderers[pageId]();
+            }
+
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    switchPage(item.dataset.page);
+                });
+            });
+
+            const bgMusic = getElement('bgMusic');
+            const musicIcon = getElement('musicIcon');
+            let musicPlaying = false;
+
+            getElement('toggleMusicBtn').addEventListener('click', function() {
+                if (musicPlaying) {
+                    bgMusic.pause();
+                    musicIcon.className = 'fas fa-play';
+                } else {
+                    bgMusic.play().catch(function() {});
+                    musicIcon.className = 'fas fa-pause';
+                }
+                musicPlaying = !musicPlaying;
+            });
+
+            bgMusic.volume = 0.25;
+
+            getElement('copyBtn').addEventListener('click', function() {
+                navigator.clipboard.writeText('@link_fight_club_ble');
+                alert(' آیدی فایت کلاب کپی شد!');
+            });
+
+            const copyCreatorBtn = getElement('copyCreatorBtn');
+            if (copyCreatorBtn) {
+                copyCreatorBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText('@ostad_amlr');
+                    alert(' آیدی سازنده کپی شد!');
+                });
+            }
+
+            function createStars() {
+                const container = getElement('starsContainer');
+                if (!container) return;
+                let starsHtml = '';
+                for (let i = 0; i < 60; i++) {
+                    const size = Math.random() * 3 + 1;
+                    const left = Math.random() * 100;
+                    const top = Math.random() * 100;
+                    const duration = Math.random() * 3 + 2;
+                    const delay = Math.random() * 5;
+                    starsHtml +=
+                        '<div class="star" style="width:' + size + 'px; height:' + size + 'px; left:' + left +
+                        '%; top:' + top + '%; --duration:' + duration + 's; --delay:' + delay + 's;"></div>';
+                }
+                container.innerHTML = starsHtml;
+            }
+            createStars();
+
+            const scrollTopBtn = getElement('scrollTopBtn');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            fetchBin().then(function() {
+                renderHallOfFame();
+                renderNews();
+                renderTournaments();
+                renderTeams();
+                renderPostsPage();
+            });
+
+        })();
+    </script>
+</body>
+</html>
