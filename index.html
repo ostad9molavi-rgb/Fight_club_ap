@@ -1,1 +1,1029 @@
-کس ننت هنری 
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>فایت کلاب | Fight Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1a0a1e 0%, #0c0c10 50%, #1e0a0a 100%);
+            font-family: 'Vazirmatn', sans-serif;
+            color: #d0d0d0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 15px 30px;
+            position: relative;
+            overflow-x: hidden;
+            animation: bodyFadeIn 1s ease;
+        }
+
+        @keyframes bodyFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .particle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(107, 114, 128, 0.05) 0%, transparent 60%);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(30, 15, 35, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 32px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(147, 51, 234, 0.08);
+            padding: 20px 18px 30px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(147, 51, 234, 0.12);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0 15px;
+            position: relative;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(to left, #c084fc, #ef4444, #f59e0b);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            animation: logoShine 3s ease-in-out infinite;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        @keyframes logoShine {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hamburger-btn {
+            background: rgba(107, 114, 128, 0.1);
+            border: 1px solid rgba(192, 132, 252, 0.5);
+            color: #c084fc;
+            font-size: 1.9rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 110;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        .hamburger-btn:hover {
+            background: rgba(147, 51, 234, 0.2);
+            border-color: #ef4444;
+            color: white;
+            box-shadow: 0 0 25px rgba(192, 132, 252, 0.7);
+            transform: scale(1.05);
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: rgba(15, 5, 18, 0.97);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-left: 1px solid rgba(239, 68, 68, 0.4);
+            box-shadow: -20px 0 40px rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            padding: 90px 25px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 0 0 0 28px;
+            overflow-y: auto;
+        }
+
+        .side-menu.active {
+            right: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 95;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-item {
+            color: #b0a0b8;
+            font-size: 1.15rem;
+            font-weight: 500;
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(107, 114, 128, 0.05);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 132, 252, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .menu-item:hover::before {
+            left: 100%;
+        }
+
+        .menu-item i {
+            font-size: 1.3rem;
+            color: #c084fc;
+            width: 24px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(147, 51, 234, 0.15);
+            border-color: #ef4444;
+            color: white;
+            transform: translateX(-6px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+        }
+
+        .menu-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .main-content {
+            margin-top: 15px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: rgba(40, 20, 45, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            border-radius: 24px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(192, 132, 252, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card:hover {
+            border-color: rgba(192, 132, 252, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(192, 132, 252, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #c084fc;
+            margin-bottom: 18px;
+            border-right: 4px solid #ef4444;
+            padding-right: 12px;
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(to left, #c084fc, #ef4444);
+            border-radius: 2px;
+        }
+
+        .link-box {
+            background: #1e1225;
+            border-radius: 18px;
+            padding: 18px;
+            text-align: center;
+            word-break: break-word;
+            border: 1px dashed #c084fc;
+            transition: all 0.3s ease;
+        }
+
+        .link-box:hover {
+            border-color: #ef4444;
+            background: #231428;
+        }
+
+        .ble-id {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #c084fc, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 10px 0;
+            animation: textGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px rgba(192, 132, 252, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.8));
+            }
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #9333ea, #dc2626);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+            margin: 10px 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #a855f7, #ef4444);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        .admin-badge {
+            background: #2d1f33;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(192, 132, 252, 0.4);
+            color: #d8b4fe;
+            display: inline-block;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-badge:hover {
+            background: #3d2f43;
+            border-color: #c084fc;
+            transform: translateY(-2px);
+        }
+
+        .owner-highlight {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            font-weight: 700;
+            color: #fca5a5;
+        }
+
+        .footer-note {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #9ca3af;
+            text-align: center;
+            border-top: 1px solid #374151;
+            padding-top: 18px;
+        }
+
+        .dev-text {
+            color: #c084fc;
+            font-weight: 700;
+        }
+
+        .creator-section {
+            background: #2d1f33;
+            border-radius: 16px;
+            padding: 18px;
+            margin-top: 20px;
+            border: 1px solid #c084fc;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .creator-section:hover {
+            border-color: #ef4444;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
+        }
+
+        .creator-id {
+            font-size: 1.3rem;
+            color: #f0e0ff;
+            margin: 10px 0;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        .hall-of-fame-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .hall-of-fame-table th {
+            background: #2d1f33;
+            padding: 14px 12px;
+            text-align: center;
+            color: #c084fc;
+            border: 1px solid #3d2f43;
+            font-weight: 700;
+        }
+
+        .hall-of-fame-table td {
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid #2d1f33;
+            transition: background 0.3s ease;
+        }
+
+        .hall-of-fame-table tr:hover td {
+            background: rgba(192, 132, 252, 0.08);
+        }
+
+        .rank-1 {
+            background: rgba(255, 215, 0, 0.2);
+        }
+        .rank-2 {
+            background: rgba(192, 192, 192, 0.15);
+        }
+        .rank-3 {
+            background: rgba(205, 127, 50, 0.15);
+        }
+
+        .achievement-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .badge-bronze {
+            background: linear-gradient(135deg, #cd7f32, #a0522d);
+            color: #fff;
+        }
+        .badge-silver {
+            background: linear-gradient(135deg, #c0c0c0, #808080);
+            color: #000;
+        }
+        .badge-gold {
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            color: #000;
+        }
+
+        .post-form-card {
+            background: rgba(50, 25, 55, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(192, 132, 252, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .post-form-card:focus-within {
+            border-color: #ef4444;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.2);
+        }
+
+        input,
+        textarea {
+            background: rgba(20, 10, 25, 0.8);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            border-radius: 16px;
+            padding: 14px 18px;
+            color: #e0d0f0;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+            background: rgba(30, 15, 35, 0.9);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .posts-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .post-card {
+            background: rgba(35, 18, 40, 0.7);
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            border-radius: 20px;
+            padding: 18px 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            animation: postAppear 0.4s ease;
+        }
+
+        @keyframes postAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .post-card:hover {
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(192, 132, 252, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c084fc, #ef4444);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .user-name {
+            font-weight: 700;
+            color: #f0e0ff;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blue-tick {
+            color: #1d9bf0;
+            font-size: 0.9rem;
+            animation: tickBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes tickBounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        .post-time {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+
+        .post-content {
+            color: #d8c8e8;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            word-wrap: break-word;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            border-top: 1px solid rgba(107, 114, 128, 0.2);
+            padding-top: 12px;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            padding: 6px 10px;
+            border-radius: 12px;
+        }
+
+        .action-btn:hover {
+            color: #c084fc;
+            background: rgba(192, 132, 252, 0.1);
+        }
+
+        .like-btn.liked {
+            color: #ef4444;
+            animation: heartBeat 0.3s ease;
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .no-posts {
+            text-align: center;
+            color: #9ca3af;
+            padding: 40px 30px;
+            font-style: italic;
+            background: rgba(30, 15, 35, 0.5);
+            border-radius: 20px;
+            border: 1px dashed rgba(192, 132, 252, 0.3);
+        }
+
+        .announcement-box {
+            background: #2d1f33;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border: 1px solid #c084fc;
+            animation: announceGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes announceGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(192, 132, 252, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(239, 68, 68, 0.3);
+            }
+        }
+
+        .announcement-box img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .tournament-item,
+        .team-card {
+            background: #2d1f33;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tournament-item:hover,
+        .team-card:hover {
+            border-color: #c084fc;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .team-card h4 {
+            color: #c084fc;
+            margin-bottom: 8px;
+        }
+
+        .team-card a {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .team-card a:hover {
+            color: #93c5fd;
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 120;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(30, 15, 35, 0.9);
+            backdrop-filter: blur(16px);
+            padding: 10px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .music-player:hover {
+            border-color: #c084fc;
+            box-shadow: 0 10px 35px rgba(192, 132, 252, 0.3);
+        }
+
+        .music-btn {
+            background: transparent;
+            border: none;
+            color: #c084fc;
+            font-size: 1.6rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .music-btn:hover {
+            color: white;
+            background: rgba(147, 51, 234, 0.3);
+            transform: rotate(360deg);
+        }
+
+        .music-label {
+            font-size: 0.8rem;
+            color: #d1d5db;
+        }
+
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 120;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(30, 15, 35, 0.9);
+            border: 1px solid rgba(192, 132, 252, 0.5);
+            color: #c084fc;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top-btn:hover {
+            background: rgba(147, 51, 234, 0.3);
+            color: white;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.5);
+        }
+
+        @media (max-width: 480px) {
+            .music-player {
+                bottom: 15px;
+                left: 15px;
+                padding: 8px 14px;
+            }
+            .side-menu {
+                width: 280px;
+            }
+            .scroll-top-btn {
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="particle-bg"></div>
+    <div class="stars" id="starsContainer"></div>
+
+    <div class="container">
+        <div class="header">
+            <span class="logo-text">فایت کلاب</span>
+            <div class="hamburger-btn" id="menuToggleBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <div class="main-content">
+
+            <div id="homePage" class="page active-page">
+                <div class="card">
+                    <div class="title">خانه</div>
+                    <p style="font-size: 1.1rem; line-height: 2.2;">
+                        فایت کلاب اصلی <span style="color:#c084fc; font-weight:700;">بله</span> ابتدا توسط
+                        <span style="color:#d8b4fe;">رضا مظفری</span> ساخته شد و تا به امروز
+                        <span style="color:#fca5a5;">4 مالک</span> داشته و هم اکنون مالک فایت کلاب اصلی بله
+                        <span style="color:#ef4444; font-weight:900;">آرشان اسپریت</span> می باشد.
+                    </p>
+                </div>
+            </div>
+
+            <div id="linksPage" class="page">
+                <div class="card">
+                    <div class="title">لینک ورود</div>
+                    <div class="link-box">
+                        <span style="display:block; color:#d1d5db;">آیدی فایت کلاب در بله:</span>
+                        <div class="ble-id" id="bleID">@link_fight_club_ble</div>
+                        <p style="margin:12px 0; font-size:0.95rem;">با وارد کردن این آیدی در <strong>بله</strong> و کلیک روی آن وارد فایت کلاب شوید</p>
+                        <button class="btn" id="copyBtn"><i class="far fa-copy"></i> کپی آیدی</button>
+                        <a href="https://ble.ir" target="_blank" rel="noopener" class="btn" style="text-decoration:none;"><i class="fas fa-external-link-alt"></i> رفتن به بله</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="adminsPage" class="page">
+                <div class="card">
+                    <div class="title">مالک و ادمین ها</div>
+                    <div style="margin-bottom: 10px;">
+                        <span class="admin-badge owner-highlight"><i class="fas fa-crown"></i> مالک: آرشان اسپریت</span>
+                    </div>
+                    <div class="admin-list" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;">
+                        <span class="admin-badge">استاد امیر</span>
+                        <span class="admin-badge">ممد کایل</span>
+                        <span class="admin-badge">نئورگان</span>
+                        <span class="admin-badge">لوسیفر</span>
+                        <span class="admin-badge">ممد استریت</span>
+                        <span class="admin-badge">امیر استریت</span>
+                        <span class="admin-badge">علی نگان</span>
+                        <span class="admin-badge">علی لوتی</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="aboutPage" class="page">
+                <div class="card">
+                    <div class="title">درباره ما</div>
+                    <p style="font-size:1.1rem;">این سایت توسط <span class="dev-text">Ostad Amir</span> ساخته شده است.</p>
+                    <p style="color:#9ca3af; margin-top:10px;">سازنده: <span style="color:#c084fc; font-weight:700;">استاد امیر</span></p>
+                    <div class="creator-section">
+                        <h4 style="color:#c084fc;">آیدی سازنده در بله</h4>
+                        <div class="creator-id" id="creatorId">@ostad_amlr</div>
+                        <div style="margin-top:10px;">
+                            <button class="btn btn-sm" id="copyCreatorBtn"><i class="far fa-copy"></i> کپی آیدی</button>
+                            <a href="https://ble.ir/ostad_amlr" target="_blank" class="btn btn-sm" style="text-decoration:none;"><i class="fas fa-external-link-alt"></i> ورود به بله</a>
+                        </div>
+                    </div>
+                    <p style="color:#9ca3af; margin-top:20px;">تمامی حقوق محفوظ می باشد 2026</p>
+                </div>
+            </div>
+
+            <div id="honorPage" class="page">
+                <div class="card">
+                    <div class="title">تالار مشاهیر</div>
+                    <div id="hallOfFameContent">
+                        <div class="no-posts">هنوز هیچ فایتری به تالار مشاهیر راه نیافته است...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="newsPage" class="page">
+                <div class="card">
+                    <div class="title">اخبار و اطلاعیه ها</div>
+                    <div id="newsContainer">
+                        <div class="no-posts">هیچ اطلاعیه ای ثبت نشده است</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="postsPage" class="page">
+                <div class="card">
+                    <div class="title">پست های کاربران</div>
+                    <div id="postsContent"></div>
+                </div>
+            </div>
+
+            <div id="tournamentsPage" class="page">
+                <div class="card">
+                    <div class="title">تورنمنت ها</div>
+                    <div id="tournamentsContent"></div>
+                </div>
+            </div>
+
+            <div id="teamsPage" class="page">
+                <div class="card">
+                    <div class="title">گاردها و اکیپ های عضو اتحادیه</div>
+                    <div id="teamsContent"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-note">
+            <i class="far fa-gem"></i> قدرت، احترام، مبارزه | فایت کلاب <span class="dev-text">Ostad Amir</span> | 2026
+        </div>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-item" data-page="home"><i class="fas fa-home"></i> خانه</div>
+        <div class="menu-item
